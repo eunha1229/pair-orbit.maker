@@ -35,7 +35,19 @@
 .paper.pattern-diamond{background-color:var(--paper);background-image:linear-gradient(45deg,var(--pattern-rgba) 1px,transparent 1px),linear-gradient(-45deg,var(--pattern-rgba) 1px,transparent 1px);background-size:var(--pattern-size) var(--pattern-size)}
 .paper.pattern-constellation{background-color:var(--paper);background-image:radial-gradient(circle at 20% 30%,var(--pattern-rgba) 1.5px,transparent 2px),radial-gradient(circle at 70% 60%,var(--pattern-rgba) 1px,transparent 2px),linear-gradient(28deg,transparent 49%,var(--pattern-rgba-soft) 50%,transparent 51%);background-size:calc(var(--pattern-size)*4) calc(var(--pattern-size)*4)}
 .paper.pattern-stars{background-color:var(--paper);background-image:radial-gradient(circle at 15% 20%,var(--pattern-rgba) 1.2px,transparent 2px),radial-gradient(circle at 78% 35%,var(--pattern-rgba) 1px,transparent 2px),radial-gradient(circle at 42% 75%,var(--pattern-rgba-soft) 1.4px,transparent 2.2px);background-size:calc(var(--pattern-size)*3.75) calc(var(--pattern-size)*3.75),calc(var(--pattern-size)*5) calc(var(--pattern-size)*5),calc(var(--pattern-size)*6.25) calc(var(--pattern-size)*6.25)}
-</style></head><body><div class="app"><main class="workspace"><article class="paper" id="capture">
+</style>
+<style id="richTextStyles">
+.rich-toolbar{position:fixed;z-index:99999;display:none;align-items:center;gap:3px;padding:5px;background:#211d27;border:1px solid #4a4354;border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.22);user-select:none}
+.rich-toolbar.show{display:flex}
+.rich-toolbar button{width:28px;height:26px;padding:0;border:0;border-radius:5px;background:#342e3c;color:#fff;font:700 12px Arial,sans-serif;cursor:pointer}
+.rich-toolbar button:hover{background:#7e65aa}
+.rich-toolbar button[data-cmd="italic"]{font-style:italic}
+.rich-toolbar button[data-cmd="strikeThrough"]{text-decoration:line-through}
+.rich-toolbar button[data-cmd="hiliteColor"]{color:#e7c9ff}
+.rich-editable:focus{outline:none}
+.paper mark,.paper .rt-highlight{background:var(--accent);color:inherit;padding:0 .08em;border-radius:.12em}
+</style>
+</head><body><div class="app"><main class="workspace"><article class="paper" id="capture">
 <section class="hero"><div class="eyebrow editable" contenteditable>PAIR ARCHIVE</div><h1 class="pair-title editable" contenteditable>PAIR NAME</h1><div class="pair-catch editable" contenteditable>“Write your pair catchphrase here.”</div><div class="pair-grid"><div class="imgbox ratio-4-3" id="pairImageBox">PAIR IMAGE</div><div class="desc editable" contenteditable>두 사람 혹은 팀의 관계, 세계관, 첫 만남과 현재의 관계 등을 자유롭게 적어주세요.</div></div></section>
 <div class="section-title" data-i18n="characters">CHARACTERS</div><section class="characters c2 layout-compact" id="characters"></section>
 
@@ -43,7 +55,13 @@
 <section id="scenesSection"><div class="section-title" data-i18n="scenes">SCENES</div><div class="scenes" id="scenes"></div></section>
 <div class="credits editable" contenteditable id="credits">IMAGE CREDITS · 이미지 출처 / 커미션 작가 / 기타 크레딧을 입력하세요.</div><div class="footer-mark">PAIR ORBIT MAKER<br><span style="display:inline-block;margin-top:6px;letter-spacing:.08em">made by @2by4_JourNey</span></div>
 </article></main>
-<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 15.3</div>
+<div id="richToolbar" class="rich-toolbar no-export" aria-label="Text formatting">
+<button type="button" data-cmd="bold" title="Bold">B</button>
+<button type="button" data-cmd="italic" title="Italic">I</button>
+<button type="button" data-cmd="strikeThrough" title="Strikethrough">S</button>
+<button type="button" data-cmd="hiliteColor" title="Highlight">H</button>
+</div>
+<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 15.4.2</div>
 <div class="group"><h3>TEMPLATE</h3><label>인원 수<select id="count"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><label style="margin-top:8px">Character layout<select id="layoutMode" onchange="applyCharacterLayout()"><option value="compact">COMPACT · 1~2인 1행 / 3~4인 2행 / 5~6인 3행</option><option value="wide">WIDE · 1~3인 1행 / 4~6인 2행</option></select></label><button class="btn wide" onclick="applyCount()">APPLY TEMPLATE</button></div>
 <div class="group"><h3>SECTIONS</h3><label>표기 언어<select id="labelLang" onchange="setLanguage(this.value)"><option value="en">English</option><option value="ko">한국어</option></select></label><div class="toggle"><span>Timeline</span><input type="checkbox" checked onchange="toggleSection('timelineSection',this.checked)"></div><div class="toggle"><span>Scenes</span><input type="checkbox" checked onchange="toggleSection('scenesSection',this.checked)"></div><div class="toggle"><span>Credits</span><input type="checkbox" checked onchange="toggleSection('credits',this.checked)"></div></div>
 <div class="group"><h3>STYLE</h3><div class="row"><label>Main<input type="color" value="#66578a" oninput="css('--main',this.value)"></label><label>Accent<input type="color" value="#9c88c4" oninput="css('--accent',this.value)"></label></div><div class="row"><label>Background<input type="color" value="#f4f2f7" oninput="css('--bg',this.value)"></label><label>Paper<input type="color" value="#ffffff" oninput="css('--paper',this.value)"></label></div><div class="row"><label>Text<input type="color" value="#24202b" oninput="css('--ink',this.value)"></label><label>Sub color<input type="color" value="#dcd4ea" oninput="css('--sub',this.value)"></label></div><div class="row"><label>Card<input id="cardColor" type="color" value="#ffffff" oninput="setCardColor(this.value)"></label><label>Card Text<input id="cardTextColor" type="color" value="#24202b" oninput="setCardText(this.value)"></label></div><div class="toggle"><span>Card Text AUTO</span><input id="cardTextAuto" type="checkbox" checked onchange="toggleCardTextAuto(this.checked)"></div><label>본문 폰트<select onchange="css('--body',this.value)"><option value="'Hahmlet',serif">Hahmlet · 명조</option><option value="'Noto Serif KR',serif">Noto Serif KR · 명조</option><option value="'Nanum Myeongjo',serif">Nanum Myeongjo · 명조</option><option value="'Gowun Batang',serif">Gowun Batang · 명조</option><option value="'Song Myung',serif">Song Myung · 명조</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR · 고딕</option><option value="'MabinogiClassicR',sans-serif">마비옛체 · 게임/픽셀</option><option value="'Nanum Gothic',sans-serif">Nanum Gothic · 고딕</option><option value="'Gowun Dodum',sans-serif">Gowun Dodum · 고딕</option><option value="'Orbit',sans-serif">Orbit · 고딕</option><option value="'Gaegu',cursive">Gaegu · 손글씨</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script · 손글씨</option><option value="'Jua',sans-serif">Jua · 디스플레이</option><option value="'Do Hyeon',sans-serif">Do Hyeon · 디스플레이</option><option value="'Black Han Sans',sans-serif">Black Han Sans · 굵은 제목</option></select></label><label style="margin-top:8px">포인트 폰트<select onchange="css('--display',this.value)"><option value="'Montserrat',sans-serif">Montserrat</option><option value="'Press Start 2P',monospace">Press Start 2P · 8bit</option><option value="'MabinogiClassicR',sans-serif">마비옛체</option><option value="'Jua',sans-serif">Jua</option><option value="'Do Hyeon',sans-serif">Do Hyeon</option><option value="'Black Han Sans',sans-serif">Black Han Sans</option><option value="'Gaegu',cursive">Gaegu</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script</option><option value="'Noto Serif KR',serif">Noto Serif KR</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR</option></select></label></div>
@@ -112,4 +130,94 @@ async function savePNG(){
 }
 function saveHTML(){let blob=new Blob(['<!doctype html>\n'+document.documentElement.outerHTML],{type:'text/html'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='pair-orbit-editable.html';a.click();URL.revokeObjectURL(a.href)}
 applyCount();addEvent();addEvent();addScene(true);
-refreshOrbit();</script></body></html>
+refreshOrbit();</script><script>
+(function(){
+  const toolbar=document.getElementById('richToolbar');
+  if(!toolbar) return;
+  let active=null, savedRange=null;
+
+  // Only prose-like fields get the formatting toolbar.
+  const proseSelector=[
+    '.hero .desc',
+    '.detail p',
+    '.note .editable',
+    '.event-desc',
+    '.scene-desc',
+    '.credits'
+  ].join(',');
+
+  function proseFromNode(node){
+    let el=node && (node.nodeType===1 ? node : node.parentElement);
+    if(!el) return null;
+    const prose=el.closest(proseSelector);
+    if(!prose || !prose.closest('.paper') || prose.closest('.editor,.rich-toolbar')) return null;
+    return prose;
+  }
+
+  function hideToolbar(){
+    toolbar.classList.remove('show');
+  }
+
+  function captureSelection(){
+    const sel=window.getSelection();
+    if(!sel || !sel.rangeCount || sel.isCollapsed){ hideToolbar(); return; }
+
+    const range=sel.getRangeAt(0);
+    const a=proseFromNode(sel.anchorNode), f=proseFromNode(sel.focusNode);
+    if(!a || !f || a!==f){ hideToolbar(); return; }
+
+    active=a;
+    savedRange=range.cloneRange();
+
+    // Make it measurable before calculating its final position.
+    toolbar.classList.add('show');
+    const rect=range.getBoundingClientRect();
+    const tw=toolbar.offsetWidth || 130;
+    const th=toolbar.offsetHeight || 36;
+    const left=Math.max(8,Math.min(window.innerWidth-tw-8,rect.left+rect.width/2-tw/2));
+    let top=rect.top-th-8;
+    if(top<8) top=Math.min(window.innerHeight-th-8,rect.bottom+8);
+    toolbar.style.left=left+'px';
+    toolbar.style.top=top+'px';
+  }
+
+  // selectionchange is more reliable for contenteditable than mouseup alone.
+  document.addEventListener('selectionchange',()=>{
+    if(toolbar.matches(':hover')) return;
+    requestAnimationFrame(captureSelection);
+  });
+  document.addEventListener('mouseup',()=>setTimeout(captureSelection,0));
+  document.addEventListener('keyup',()=>setTimeout(captureSelection,0));
+  window.addEventListener('scroll',()=>{ if(toolbar.classList.contains('show')) captureSelection(); },true);
+
+  document.addEventListener('mousedown',e=>{
+    if(toolbar.contains(e.target)) return;
+    if(!proseFromNode(e.target)) hideToolbar();
+  });
+
+  // Keep the selected text alive while clicking toolbar buttons.
+  toolbar.addEventListener('mousedown',e=>e.preventDefault());
+  toolbar.addEventListener('click',e=>{
+    const b=e.target.closest('button');
+    if(!b || !savedRange || !active) return;
+
+    const sel=window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(savedRange);
+    active.focus();
+
+    if(b.dataset.cmd==='hiliteColor'){
+      const char=active.closest('.char');
+      const accent=(char ? getComputedStyle(char).getPropertyValue('--c-accent') : '')?.trim()
+        || getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()
+        || '#d9c8ef';
+      try{ document.execCommand('styleWithCSS',false,true); }catch(_){}
+      document.execCommand('hiliteColor',false,accent);
+    }else{
+      document.execCommand(b.dataset.cmd,false,null);
+    }
+    if(sel.rangeCount) savedRange=sel.getRangeAt(0).cloneRange();
+    captureSelection();
+  });
+})();
+</script></body></html>
