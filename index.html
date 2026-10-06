@@ -160,6 +160,49 @@
 }
 </style>
 
+
+<style id="imageGeometryFixV1639">
+/* Never distort uploaded images: one dimension is auto, so intrinsic aspect ratio survives. */
+.imgbox:not(.fullbody) img{
+  position:absolute !important;
+  left:50% !important;
+  top:50% !important;
+  width:100% !important;
+  height:auto !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  max-width:none !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  transform-origin:center center !important;
+}
+/* portrait frames should be filled vertically when that is the limiting dimension */
+.portrait img{
+  width:auto !important;
+  height:100% !important;
+}
+/* full-body keeps its own bottom-anchored geometry */
+.fullbody img{
+  top:auto !important;
+  width:auto !important;
+  height:var(--body-h,520px) !important;
+}
+
+/* Browser-consistent Korean/CJK justification. */
+.paper .hero .desc,
+.paper .detail-text,
+.paper .note .editable,
+.paper .event-desc,
+.paper .scene-desc,
+.paper .credits{
+  text-align:justify !important;
+  text-align-last:left !important;
+  text-justify:inter-character !important;
+  word-break:keep-all !important;
+  overflow-wrap:break-word !important;
+}
+</style>
+
 </head><body><div class="app"><main class="workspace"><article class="paper" id="capture">
 <section class="hero"><div class="eyebrow editable" contenteditable>PAIR ARCHIVE</div><h1 class="pair-title editable" contenteditable>PAIR NAME</h1><div class="pair-catch editable" contenteditable>“Write your pair catchphrase here.”</div><div class="pair-grid"><div class="imgbox ratio-4-3" id="pairImageBox">PAIR IMAGE</div><div class="desc editable" contenteditable>두 사람 혹은 팀의 관계, 세계관, 첫 만남과 현재의 관계 등을 자유롭게 적어주세요.</div></div></section>
 <div class="section-title" data-i18n="characters">CHARACTERS</div><section class="characters c2 layout-compact" id="characters"></section>
@@ -175,7 +218,7 @@
 <button type="button" data-cmd="hiliteColor" title="Highlight">H</button>
 <button type="button" data-size="s" title="Small">S</button><button type="button" data-size="m" title="Normal">M</button><button type="button" data-size="l" title="Large">L</button><button type="button" data-size="xl" title="Extra Large">XL</button>
 </div>
-<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 16.3.8</div>
+<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 16.3.9</div>
 <div class="group"><h3>TEMPLATE</h3><label>인원 수<select id="count"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><label style="margin-top:8px">Character layout<select id="layoutMode" onchange="applyCharacterLayout()"><option value="compact">COMPACT · 1~2인 1행 / 3~4인 2행 / 5~6인 3행</option><option value="wide">WIDE · 1~3인 1행 / 4~6인 2행</option></select></label><button class="btn wide" onclick="applyCount()">APPLY TEMPLATE</button></div>
 <div class="group"><h3>SECTIONS</h3><label>표기 언어<select id="labelLang" onchange="setLanguage(this.value)"><option value="en">English</option><option value="ko">한국어</option></select></label><div class="toggle"><span>Timeline</span><input type="checkbox" checked onchange="toggleSection('timelineSection',this.checked)"></div><div class="toggle"><span>Scenes</span><input type="checkbox" checked onchange="toggleSection('scenesSection',this.checked)"></div><div class="toggle"><span>Credits</span><input type="checkbox" checked onchange="toggleSection('credits',this.checked)"></div></div>
 <div class="group"><h3>STYLE</h3><div class="row"><label>Main<input type="color" value="#66578a" oninput="css('--main',this.value)"></label><label>Accent<input type="color" value="#9c88c4" oninput="css('--accent',this.value)"></label></div><div class="row"><label>Background<input type="color" value="#f4f2f7" oninput="css('--bg',this.value)"></label><label>Paper<input type="color" value="#ffffff" oninput="css('--paper',this.value)"></label></div><div class="row"><label>Text<input type="color" value="#24202b" oninput="css('--ink',this.value)"></label><label>Sub color<input type="color" value="#dcd4ea" oninput="css('--sub',this.value)"></label></div><div class="row"><label>Card<input id="cardColor" type="color" value="#ffffff" oninput="setCardColor(this.value)"></label><label>Card Text<input id="cardTextColor" type="color" value="#24202b" oninput="setCardText(this.value)"></label></div><div class="toggle"><span>Card Text AUTO</span><input id="cardTextAuto" type="checkbox" checked onchange="toggleCardTextAuto(this.checked)"></div><label>본문 폰트<select onchange="css('--body',this.value)"><option value="'Hahmlet',serif">Hahmlet · 명조</option><option value="'Noto Serif KR',serif">Noto Serif KR · 명조</option><option value="'Nanum Myeongjo',serif">Nanum Myeongjo · 명조</option><option value="'Gowun Batang',serif">Gowun Batang · 명조</option><option value="'Song Myung',serif">Song Myung · 명조</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR · 고딕</option><option value="'MabinogiClassicR',sans-serif">마비옛체 · 게임/픽셀</option><option value="'Nanum Gothic',sans-serif">Nanum Gothic · 고딕</option><option value="'Gowun Dodum',sans-serif">Gowun Dodum · 고딕</option><option value="'Orbit',sans-serif">Orbit · 고딕</option><option value="'Gaegu',cursive">Gaegu · 손글씨</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script · 손글씨</option><option value="'Jua',sans-serif">Jua · 디스플레이</option><option value="'Do Hyeon',sans-serif">Do Hyeon · 디스플레이</option><option value="'Black Han Sans',sans-serif">Black Han Sans · 굵은 제목</option></select></label><label style="margin-top:8px">포인트 폰트<select onchange="css('--display',this.value)"><option value="'Montserrat',sans-serif">Montserrat</option><option value="'Press Start 2P',monospace">Press Start 2P · 8bit</option><option value="'MabinogiClassicR',sans-serif">마비옛체</option><option value="'Jua',sans-serif">Jua</option><option value="'Do Hyeon',sans-serif">Do Hyeon</option><option value="'Black Han Sans',sans-serif">Black Han Sans</option><option value="'Gaegu',cursive">Gaegu</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script</option><option value="'Noto Serif KR',serif">Noto Serif KR</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR</option></select></label></div>
@@ -262,7 +305,12 @@ function cropTransparentImage(dataUrl,cb){
 function loadImage(input,id,natural=false){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{let finish=src=>{let b=document.getElementById(id);b.innerHTML=`<img src="${src}">`;imgState[id]={scale:100,x:0,y:0};if(!natural)updateImg(id);else requestAnimationFrame(syncFullBodies)};if(natural)cropTransparentImage(e.target.result,finish);else finish(e.target.result)};r.readAsDataURL(f)}
 function setRatio(id,r){let b=document.getElementById(id);['ratio-1-1','ratio-2-3','ratio-3-4','ratio-4-3','ratio-9-16','ratio-16-9'].forEach(c=>b.classList.remove(c));b.classList.add('ratio-'+r)}
 function charColor(i,k,v){document.getElementById('char'+i)?.style.setProperty(k,v)}
-function imgScale(id,v){if(!imgState[id])return;imgState[id].scale=+v;updateImg(id)}function imgPos(id,a,v){if(!imgState[id])return;imgState[id][a]=+v;updateImg(id)}function updateImg(id){let b=document.getElementById(id),im=b.querySelector('img'),s=imgState[id];if(im)im.style.transform=`translate(${s.x}px,${s.y}px) scale(${s.scale/100})`}function resetImage(id,wrap){if(!imgState[id])return;imgState[id]={scale:100,x:0,y:0};updateImg(id);wrap?.querySelectorAll('input[type=range]').forEach((el,n)=>el.value=n===0?100:0)}
+function imgScale(id,v){if(!imgState[id])return;imgState[id].scale=+v;updateImg(id)}function imgPos(id,a,v){if(!imgState[id])return;imgState[id][a]=+v;updateImg(id)}function updateImg(id){
+ let b=document.getElementById(id),im=b?.querySelector('img'),st=imgState[id];
+ if(!im||!st)return;
+ if(b.classList.contains('fullbody'))return;
+ im.style.transform=`translate(calc(-50% + ${st.x}px),calc(-50% + ${st.y}px)) scale(${st.scale/100})`;
+}function resetImage(id,wrap){if(!imgState[id])return;imgState[id]={scale:100,x:0,y:0};updateImg(id);wrap?.querySelectorAll('input[type=range]').forEach((el,n)=>el.value=n===0?100:0)}
 const I18N={en:{characters:'CHARACTERS',timeline:'TIMELINE',scenes:'SCENES',features:'FEATURES & APPEARANCE',animal:'ANIMALIZATION',item:'ITEM / SYMBOL',must:'MUST',ng:'NG'},ko:{characters:'캐릭터',timeline:'연표',scenes:'장면',features:'특징 및 외관',animal:'동물화',item:'소품 / 상징물',must:'필수 요소',ng:'NG 요소'}};let currentLang='en';function setLanguage(lang){currentLang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{let k=el.dataset.i18n;if(I18N[lang][k])el.textContent=I18N[lang][k]});scheduleCharacterRowSync()}const charHeights={};const heightScaleEnabled={};function setCharHeight(i,v){v=Math.max(80,Math.min(250,+v||170));charHeights[i]=v;heightScaleEnabled[i]=heightScaleEnabled[i]!==false;let f=document.querySelector('#char'+i+' .height-fact');if(f)f.textContent='HEIGHT · '+v+' cm';syncFullBodies()}function toggleHeightScale(i,on){heightScaleEnabled[i]=on;syncFullBodies()}function heightFactEdited(i,el){let m=el.textContent.match(/(\d{2,3})/);if(m){charHeights[i]=Math.max(80,Math.min(250,+m[1]));let inp=document.getElementById('height'+i);if(inp)inp.value=charHeights[i];syncFullBodies()}}function syncFullBodies(){let boxes=[...document.querySelectorAll('.fullbody')];if(!boxes.length)return;let vals=boxes.map((b,idx)=>charHeights[idx+1]||170),maxH=Math.max(...vals,170);let commonScale=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--fullbody-scale'))||1.15;let baseStage=charCount===1?680:560;let stage=baseStage*commonScale;boxes.forEach((b,idx)=>{let i=idx+1,h=charHeights[i]||170;let ratio=heightScaleEnabled[i]===false?1:h/maxH;let imageH=baseStage*commonScale*ratio;b.style.setProperty('height',stage+'px','important');b.style.setProperty('--body-h',imageH+'px')});scheduleCharacterRowSync()}
 let rowSyncRAF=0,rowSyncBusy=false;
 function scheduleCharacterRowSync(){
@@ -369,15 +417,20 @@ async function savePNG(){
   void source.offsetHeight;
   await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
 
-  // Freeze full-body images to the exact live-preview pixel geometry.
-  // html2canvas otherwise re-evaluates percentage/calc/transform positioning.
-  const frozenBodies=[...source.querySelectorAll('.fullbody img')].map(im=>{
+  // Freeze every uploaded image to the exact LIVE preview rectangle.
+  // This avoids html2canvas recomputing transform/percent geometry differently.
+  const frozenImages=[...source.querySelectorAll('.imgbox img')].map(im=>{
     const box=im.parentElement, ir=im.getBoundingClientRect(), br=box.getBoundingClientRect();
     const old=im.getAttribute('style')||'';
     im.style.setProperty('left',(ir.left-br.left)+'px','important');
-    im.style.setProperty('bottom',(br.bottom-ir.bottom)+'px','important');
+    im.style.setProperty('top',(ir.top-br.top)+'px','important');
+    im.style.setProperty('bottom','auto','important');
     im.style.setProperty('width',ir.width+'px','important');
     im.style.setProperty('height',ir.height+'px','important');
+    im.style.setProperty('min-width','0','important');
+    im.style.setProperty('min-height','0','important');
+    im.style.setProperty('max-width','none','important');
+    im.style.setProperty('max-height','none','important');
     im.style.setProperty('transform','none','important');
     return {im,old};
   });
@@ -390,11 +443,11 @@ async function savePNG(){
     backgroundColor:getComputedStyle(source).backgroundColor||'#ffffff',
     logging:false,imageTimeout:15000,
     width:Math.ceil(source.scrollWidth),height:Math.ceil(source.scrollHeight),
-    windowWidth:Math.ceil(document.documentElement.clientWidth),
-    windowHeight:Math.ceil(document.documentElement.clientHeight),
+    windowWidth:Math.ceil(source.scrollWidth),
+    windowHeight:Math.ceil(source.scrollHeight),
     scrollX:0,scrollY:0
   });
-  frozenBodies.forEach(({im,old})=>old?im.setAttribute('style',old):im.removeAttribute('style'));
+  frozenImages.forEach(({im,old})=>old?im.setAttribute('style',old):im.removeAttribute('style'));
   const blob=await new Promise(res=>canvas.toBlob(res,'image/png')); if(!blob) throw new Error('PNG 파일 생성에 실패했습니다.');
   const url=URL.createObjectURL(blob),a=document.createElement('a'); a.download='pair-orbit.png'; a.href=url; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1500);
  }catch(err){console.error(err);alert('PNG 저장 중 오류가 발생했습니다.\n'+(err?.message||err))}
@@ -478,7 +531,7 @@ function saveJSON(){
     const payload={
       format:'pair-orbit-maker',
       schemaVersion:DATA_SCHEMA_VERSION,
-      appVersion:'16.3.8',
+      appVersion:'16.3.9',
       savedAt:new Date().toISOString(),
       data:{
         paperHTML:document.getElementById('capture').innerHTML,
@@ -516,7 +569,7 @@ function loadJSON(input){
       restoreEditableHTML(d.editableHTML);
       Object.entries(d.rootVars||{}).forEach(([k,v])=>css(k,v));
       restoreControls(d.controls);
-      Object.keys(imgState).forEach(k=>delete imgState[k]);Object.assign(imgState,d.imgState||{});
+      Object.keys(imgState).forEach(k=>delete imgState[k]);Object.assign(imgState,d.imgState||{});Object.keys(imgState).forEach(id=>updateImg(id));
       charCount=d.charCount||document.querySelectorAll('.char').length||1;
       layoutMode=d.layoutMode||'compact';currentLang=d.currentLang||'en';
       eventN=d.eventN||document.querySelectorAll('.event').length;

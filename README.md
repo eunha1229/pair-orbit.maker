@@ -1,12 +1,13 @@
-# PAIR ORBIT MAKER v16.3.8
+# PAIR ORBIT MAKER v16.3.9
 
-Fixes
-- Fixed rich-text spans breaking justified prose into uneven short lines.
-- Justification now belongs to the editable paragraph container only.
-- Bold / italic / highlight / size spans no longer receive their own text-align-last rule.
-- Edge Accent is constrained to top/bottom; it no longer creates left/right rails.
-- Paper Border remains the separate four-sided border option.
-- Keeps v16.3.7 and earlier fixes.
+Image geometry hotfix
+- Uploaded pair/portrait/scene images keep their original aspect ratio.
+- Scale/X/Y use one centered transform model.
+- JSON load reapplies saved image transforms.
+- PNG export freezes every image to the exact live-preview pixel rectangle before capture.
+- Export viewport now follows the paper itself rather than the editor/browser viewport.
+- Full-body export keeps the existing bottom-anchored geometry.
+- Korean/CJK prose justification uses keep-all + inter-character justification.
 
 PAIR ORBIT MAKER
 made by @2by4_JourNey
