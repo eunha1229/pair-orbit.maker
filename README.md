@@ -1,13 +1,12 @@
-# PAIR ORBIT MAKER v16.3
+# PAIR ORBIT MAKER v16.3.2
 
-## v16.3
-- Full Body X 공통 좌우 위치 조절 추가 (-150 ~ +150 px)
-- Full Body Scale + X 일괄 Reset 추가
-- 특징/동물화/소품·상징물 입력 영역을 `<p contenteditable>`에서 안정적인 `<div contenteditable>` 구조로 변경
-- Enter로 만든 2문단 이후가 편집 영역 밖으로 빠져나가던 브라우저 DOM 문제 수정
-- 구버전 JSON 로딩 시 기존 detail `<p>`를 새 편집 구조로 자동 변환
-- schemaVersion 3
-- 기존 schema 1/2 JSON 로딩 호환 유지
+## v16.3.2
+- 같은 그리드 행의 캐릭터끼리 전신 이미지 영역 높이 동기화
+- 특징 및 외관 / 동물화 / 소품·상징물 / 필수·NG 영역을 섹션별로 행 단위 동기화
+- STANDARD/WIDE 및 1~6인 레이아웃에서 실제 같은 줄에 놓인 캐릭터끼리만 정렬
+- 본문 입력·줄바꿈·폰트 크기 변화에 따라 자동 재정렬
+- PNG 저장 직전에도 정렬을 다시 계산하여 미리보기와 저장본의 배치 일치 강화
+- v16.3.1의 PNG 실시간 DOM 캡처 및 Full Body Scale/X 기능 유지
 
-PAIR ORBIT MAKER  
+PAIR ORBIT MAKER
 made by @2by4_JourNey
