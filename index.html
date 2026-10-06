@@ -57,6 +57,38 @@
 .paper .section-title,.paper .detail h3,.paper .detail h4,.paper .note h3,.paper .note h4,.paper .eyebrow{font-size:var(--label-scale-pct)}
 .paper .meta,.paper .chip,.paper .tag,.paper .codename,.paper .scene-meta,.paper .event-time{font-size:var(--meta-scale-pct)}
 .rt-size-s{font-size:.85em}.rt-size-m{font-size:1em}.rt-size-l{font-size:1.2em}.rt-size-xl{font-size:1.45em}
+
+.paper .hero .desc *,
+.paper .detail p *,
+.paper .detail-text *,
+.paper .note .editable *,
+.paper .event-desc *,
+.paper .scene-desc *,
+.paper .credits *{
+  font-family:inherit;
+  line-height:inherit;
+  letter-spacing:inherit;
+}
+.paper .hero .desc > div,.paper .hero .desc > p,
+.paper .detail p > div,.paper .detail p > p,
+.paper .detail-text > div,.paper .detail-text > p,
+.paper .note .editable > div,.paper .note .editable > p,
+.paper .event-desc > div,.paper .event-desc > p,
+.paper .scene-desc > div,.paper .scene-desc > p,
+.paper .credits > div,.paper .credits > p{
+  margin:0;
+  padding:0;
+  font-size:1em;
+  line-height:inherit;
+}
+.rt-size-s{font-size:.85em!important;line-height:inherit!important}
+.rt-size-m{font-size:1em!important;line-height:inherit!important}
+.rt-size-l{font-size:1.2em!important;line-height:inherit!important}
+.rt-size-xl{font-size:1.45em!important;line-height:inherit!important}
+.rt-bold{font-weight:700!important;font-family:inherit!important;font-size:inherit!important;line-height:inherit!important}
+.rt-italic{font-style:italic!important;font-family:inherit!important;font-size:inherit!important;line-height:inherit!important}
+.rt-strike{text-decoration:line-through!important;font-family:inherit!important;font-size:inherit!important;line-height:inherit!important}
+
 .typo-value{float:right;font-size:10px;color:#aaa}
 </style>
 <style id="proseJustifyStyles">
@@ -86,7 +118,7 @@
 <button type="button" data-cmd="hiliteColor" title="Highlight">H</button>
 <button type="button" data-size="s" title="Small">S</button><button type="button" data-size="m" title="Normal">M</button><button type="button" data-size="l" title="Large">L</button><button type="button" data-size="xl" title="Extra Large">XL</button>
 </div>
-<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 16.3.5</div>
+<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 16.3.6</div>
 <div class="group"><h3>TEMPLATE</h3><label>인원 수<select id="count"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><label style="margin-top:8px">Character layout<select id="layoutMode" onchange="applyCharacterLayout()"><option value="compact">COMPACT · 1~2인 1행 / 3~4인 2행 / 5~6인 3행</option><option value="wide">WIDE · 1~3인 1행 / 4~6인 2행</option></select></label><button class="btn wide" onclick="applyCount()">APPLY TEMPLATE</button></div>
 <div class="group"><h3>SECTIONS</h3><label>표기 언어<select id="labelLang" onchange="setLanguage(this.value)"><option value="en">English</option><option value="ko">한국어</option></select></label><div class="toggle"><span>Timeline</span><input type="checkbox" checked onchange="toggleSection('timelineSection',this.checked)"></div><div class="toggle"><span>Scenes</span><input type="checkbox" checked onchange="toggleSection('scenesSection',this.checked)"></div><div class="toggle"><span>Credits</span><input type="checkbox" checked onchange="toggleSection('credits',this.checked)"></div></div>
 <div class="group"><h3>STYLE</h3><div class="row"><label>Main<input type="color" value="#66578a" oninput="css('--main',this.value)"></label><label>Accent<input type="color" value="#9c88c4" oninput="css('--accent',this.value)"></label></div><div class="row"><label>Background<input type="color" value="#f4f2f7" oninput="css('--bg',this.value)"></label><label>Paper<input type="color" value="#ffffff" oninput="css('--paper',this.value)"></label></div><div class="row"><label>Text<input type="color" value="#24202b" oninput="css('--ink',this.value)"></label><label>Sub color<input type="color" value="#dcd4ea" oninput="css('--sub',this.value)"></label></div><div class="row"><label>Card<input id="cardColor" type="color" value="#ffffff" oninput="setCardColor(this.value)"></label><label>Card Text<input id="cardTextColor" type="color" value="#24202b" oninput="setCardText(this.value)"></label></div><div class="toggle"><span>Card Text AUTO</span><input id="cardTextAuto" type="checkbox" checked onchange="toggleCardTextAuto(this.checked)"></div><label>본문 폰트<select onchange="css('--body',this.value)"><option value="'Hahmlet',serif">Hahmlet · 명조</option><option value="'Noto Serif KR',serif">Noto Serif KR · 명조</option><option value="'Nanum Myeongjo',serif">Nanum Myeongjo · 명조</option><option value="'Gowun Batang',serif">Gowun Batang · 명조</option><option value="'Song Myung',serif">Song Myung · 명조</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR · 고딕</option><option value="'MabinogiClassicR',sans-serif">마비옛체 · 게임/픽셀</option><option value="'Nanum Gothic',sans-serif">Nanum Gothic · 고딕</option><option value="'Gowun Dodum',sans-serif">Gowun Dodum · 고딕</option><option value="'Orbit',sans-serif">Orbit · 고딕</option><option value="'Gaegu',cursive">Gaegu · 손글씨</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script · 손글씨</option><option value="'Jua',sans-serif">Jua · 디스플레이</option><option value="'Do Hyeon',sans-serif">Do Hyeon · 디스플레이</option><option value="'Black Han Sans',sans-serif">Black Han Sans · 굵은 제목</option></select></label><label style="margin-top:8px">포인트 폰트<select onchange="css('--display',this.value)"><option value="'Montserrat',sans-serif">Montserrat</option><option value="'Press Start 2P',monospace">Press Start 2P · 8bit</option><option value="'MabinogiClassicR',sans-serif">마비옛체</option><option value="'Jua',sans-serif">Jua</option><option value="'Do Hyeon',sans-serif">Do Hyeon</option><option value="'Black Han Sans',sans-serif">Black Han Sans</option><option value="'Gaegu',cursive">Gaegu</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script</option><option value="'Noto Serif KR',serif">Noto Serif KR</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR</option></select></label></div>
@@ -389,7 +421,7 @@ function saveJSON(){
     const payload={
       format:'pair-orbit-maker',
       schemaVersion:DATA_SCHEMA_VERSION,
-      appVersion:'16.3.5',
+      appVersion:'16.3.6',
       savedAt:new Date().toISOString(),
       data:{
         paperHTML:document.getElementById('capture').innerHTML,
@@ -497,7 +529,39 @@ refreshOrbit();scheduleCharacterRowSync();</script><script>
     toolbar.style.top=top+'px';
   }
 
+
+  document.addEventListener('keydown',e=>{
+    const prose=proseFromNode(e.target);
+    if(!prose || e.key!=='Enter') return;
+    e.preventDefault();
+    const sel=window.getSelection();
+    if(!sel.rangeCount) return;
+    const range=sel.getRangeAt(0);
+    range.deleteContents();
+    const br=document.createElement('br');
+    range.insertNode(br);
+    range.setStartAfter(br); range.collapse(true);
+    sel.removeAllRanges(); sel.addRange(range);
+    prose.dispatchEvent(new Event('input',{bubbles:true}));
+  });
+
   // selectionchange is more reliable for contenteditable than mouseup alone.
+
+  function normalizeRichBlocks(root){
+    if(!root) return;
+    [...root.querySelectorAll(':scope > div,:scope > p')].forEach(block=>{
+      const frag=document.createDocumentFragment();
+      while(block.firstChild) frag.appendChild(block.firstChild);
+      if(block.previousSibling) root.insertBefore(document.createElement('br'),block);
+      root.insertBefore(frag,block);
+      block.remove();
+    });
+  }
+  document.addEventListener('input',e=>{
+    const prose=proseFromNode(e.target);
+    if(prose) normalizeRichBlocks(prose);
+  });
+
   document.addEventListener('selectionchange',()=>{
     if(toolbar.matches(':hover')) return;
     requestAnimationFrame(captureSelection);
@@ -534,10 +598,22 @@ refreshOrbit();scheduleCharacterRowSync();</script><script>
       const accent=(char ? getComputedStyle(char).getPropertyValue('--c-accent') : '')?.trim()
         || getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()
         || '#d9c8ef';
-      try{ document.execCommand('styleWithCSS',false,true); }catch(_){}
-      document.execCommand('hiliteColor',false,accent);
+      const range=sel.getRangeAt(0);
+      if(!range.collapsed){
+        const span=document.createElement('span');
+        span.className='rt-highlight';
+        span.style.backgroundColor=accent;
+        try{range.surroundContents(span)}catch(_){const frag=range.extractContents();span.appendChild(frag);range.insertNode(span)}
+        sel.removeAllRanges();const nr=document.createRange();nr.selectNodeContents(span);sel.addRange(nr);
+      }
     }else{
-      document.execCommand(b.dataset.cmd,false,null);
+      const cls=b.dataset.cmd==='bold'?'rt-bold':b.dataset.cmd==='italic'?'rt-italic':b.dataset.cmd==='strikeThrough'?'rt-strike':'';
+      const range=sel.getRangeAt(0);
+      if(cls && !range.collapsed){
+        const span=document.createElement('span'); span.className=cls;
+        try{range.surroundContents(span)}catch(_){const frag=range.extractContents();span.appendChild(frag);range.insertNode(span)}
+        sel.removeAllRanges();const nr=document.createRange();nr.selectNodeContents(span);sel.addRange(nr);
+      }
     }
     if(sel.rangeCount) savedRange=sel.getRangeAt(0).cloneRange();
     captureSelection();
