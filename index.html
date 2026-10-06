@@ -5,11 +5,11 @@
 *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body)} button,input,textarea,select{font:inherit} button{cursor:pointer}
 .app{display:grid;grid-template-columns:minmax(0,1fr) 350px;min-height:100vh}.workspace{padding:34px;overflow:auto}.panel{background:#201d26;color:#eee;padding:20px;position:sticky;top:0;height:100vh;overflow:auto}.panel h1{font:700 18px var(--display);letter-spacing:.12em;margin:0 0 4px}.panel .ver{font:11px var(--display);color:#9e96a8;margin-bottom:20px}.group{border-top:1px solid #3d3746;padding:15px 0}.group h3{font:600 11px var(--display);letter-spacing:.14em;color:#bcb2ca;margin:0 0 11px}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}.panel label{font-size:11px;color:#bbb3c3;display:block}.panel input,.panel select,.panel textarea{width:100%;margin-top:4px;border:1px solid #484150;background:#2b2731;color:#fff;border-radius:7px;padding:8px}.panel input[type=color]{height:38px;padding:3px}.btn{border:0;border-radius:8px;padding:9px 11px;background:#76629d;color:white;font:600 11px var(--display);letter-spacing:.04em}.btn.ghost{background:#35303d}.btn.wide{width:100%;margin-top:7px}.toggle{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:12px}.paper{width:min(1120px,100%);margin:auto;background:var(--paper);min-height:900px;border-radius:8px;box-shadow:0 15px 50px #332b4420;padding:56px;position:relative;overflow:hidden}.paper:before{content:none}
 .paper.canvas-wide{width:1600px;max-width:none}.workspace:has(.paper.canvas-wide){overflow-x:auto}.paper.canvas-wide .pair-grid{grid-template-columns:1.05fr .95fr}
-.hero{text-align:center;border-bottom:1px solid var(--line);padding-bottom:34px}.eyebrow{font:600 11px var(--display);letter-spacing:.28em;color:var(--main)}.pair-title{font-size:42px;margin:8px 0 3px}.editable{outline:none}.pair-catch{color:var(--muted);font-style:italic}.pair-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;margin-top:28px;text-align:left}.imgbox{background:#eeeaf3;border:1px dashed #c7bfd2;min-height:260px;position:relative;overflow:hidden;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#aaa;font:11px var(--display)}.imgbox img{position:absolute;width:100%;height:100%;object-fit:contain;object-position:center;transform-origin:center}.ratio-3-4{aspect-ratio:3/4}.ratio-4-3{aspect-ratio:4/3}.ratio-9-16{aspect-ratio:9/16}.ratio-16-9{aspect-ratio:16/9}.ratio-1-1{aspect-ratio:1/1}.ratio-2-3{aspect-ratio:2/3}.fullbody{background:transparent!important;border:0!important;border-radius:0!important;min-height:0!important;overflow:visible!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;color:transparent}.fullbody img{position:relative!important;bottom:auto!important;left:var(--fullbody-x,0px)!important;width:auto!important;height:var(--body-h,520px)!important;max-width:none!important;max-height:none!important;display:block!important;transform:none!important;transform-origin:center bottom!important;object-fit:contain;object-position:center bottom;flex:0 0 auto!important}.fullbody{height:560px!important}.char{--char-main:var(--main);--char-accent:var(--accent);--char-sub:var(--sub);--char-line:var(--line)}.char .char-no,.char .detail b{color:var(--char-main)}.char .codename{background:var(--char-sub);color:var(--char-main)}.char .keyword{background:var(--char-sub);color:var(--char-main)}.char .char-head{border-color:var(--char-line)}.char{border-color:var(--char-line)}.desc{white-space:pre-wrap;line-height:1.8;font-size:14px}.section-title{font:700 12px var(--display);letter-spacing:.2em;color:var(--main);margin:var(--section-gap) 0 17px;display:flex;align-items:center;gap:10px}.section-title:after{content:'';height:1px;background:var(--line);flex:1} .characters{display:grid;gap:24px}
+.hero{text-align:center;border-bottom:1px solid var(--line);padding-bottom:34px}.eyebrow{font:600 11px var(--display);letter-spacing:.28em;color:var(--main)}.pair-title{font-size:42px;margin:8px 0 3px}.editable{outline:none}.pair-catch{color:var(--muted);font-style:italic}.pair-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;margin-top:28px;text-align:left}.imgbox{background:#eeeaf3;border:1px dashed #c7bfd2;min-height:260px;position:relative;overflow:hidden;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#aaa;font:11px var(--display)}.imgbox img{position:absolute;width:100%;height:100%;object-fit:contain;object-position:center;transform-origin:center}.ratio-3-4{aspect-ratio:3/4}.ratio-4-3{aspect-ratio:4/3}.ratio-9-16{aspect-ratio:9/16}.ratio-16-9{aspect-ratio:16/9}.ratio-1-1{aspect-ratio:1/1}.ratio-2-3{aspect-ratio:2/3}.fullbody{background:transparent!important;border:0!important;border-radius:0!important;min-height:0!important;overflow:visible!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;color:transparent}.fullbody img{position:absolute!important;bottom:0!important;left:calc(50% + var(--fullbody-x,0px))!important;width:auto!important;height:var(--body-h,520px)!important;max-width:none!important;max-height:none!important;display:block!important;transform:translateX(-50%)!important;transform-origin:center bottom!important;object-fit:contain;object-position:center bottom}.fullbody{height:560px!important}.char{--char-main:var(--main);--char-accent:var(--accent);--char-sub:var(--sub);--char-line:var(--line)}.char .char-no,.char .detail b{color:var(--char-main)}.char .codename{background:var(--char-sub);color:var(--char-main)}.char .keyword{background:var(--char-sub);color:var(--char-main)}.char .char-head{border-color:var(--char-line)}.char{border-color:var(--char-line)}.desc{white-space:pre-wrap;line-height:1.8;font-size:14px}.section-title{font:700 12px var(--display);letter-spacing:.2em;color:var(--main);margin:var(--section-gap) 0 17px;display:flex;align-items:center;gap:10px}.section-title:after{content:'';height:1px;background:var(--line);flex:1} .characters{display:grid;gap:24px}
 /* COMPACT: 1~2인 1행 / 3~4인 2행 / 5~6인 3행 */
 .characters.layout-compact.c1{grid-template-columns:1fr}.characters.layout-compact.c2{grid-template-columns:repeat(2,1fr)}.characters.layout-compact.c3,.characters.layout-compact.c4,.characters.layout-compact.c5,.characters.layout-compact.c6{grid-template-columns:repeat(2,1fr)}
 /* WIDE: 1~3인 1행 / 4~6인 2행 */
-.characters.layout-wide.c1{grid-template-columns:1fr}.characters.layout-wide.c2{grid-template-columns:repeat(2,1fr)}.characters.layout-wide.c3{grid-template-columns:repeat(3,1fr)}.characters.layout-wide.c4{grid-template-columns:repeat(2,1fr)}.characters.layout-wide.c5,.characters.layout-wide.c6{grid-template-columns:repeat(3,1fr)}.char{border:1px solid var(--line);border-radius:var(--card-radius);padding:20px;position:relative;background:var(--card);color:var(--card-ink);box-shadow:var(--shadow)}.char-head{display:flex;justify-content:space-between;gap:12px;align-items:start;border-bottom:1px solid var(--line);padding-bottom:13px}.char-no{font:600 10px var(--display);color:var(--accent);letter-spacing:.18em}.char-name{font-size:24px;font-weight:600}.original{font-size:11px;color:var(--muted);margin-left:7px}.codename{font:600 10px var(--display);padding:4px 7px;background:var(--sub);border-radius:999px;color:var(--main)}.catch{font-size:12px;color:var(--muted);font-style:italic;margin:9px 0 14px}.facts{display:flex;gap:7px;flex-wrap:wrap}.fact,.keyword{font:600 10px var(--display);border:1px solid var(--line);border-radius:999px;padding:5px 8px}.keywords{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}.keyword{background:var(--sub);color:var(--main);border:0}.char-images{display:grid;grid-template-columns:1.35fr .8fr;gap:9px;margin:15px 0}/* 각 행에서 전신이 가운데를 향하도록 배치 */
+.characters.layout-wide.c1{grid-template-columns:1fr}.characters.layout-wide.c2{grid-template-columns:repeat(2,1fr)}.characters.layout-wide.c3{grid-template-columns:repeat(3,1fr)}.characters.layout-wide.c4{grid-template-columns:repeat(2,1fr)}.characters.layout-wide.c5,.characters.layout-wide.c6{grid-template-columns:repeat(3,1fr)}.char{border:1px solid var(--line);border-radius:var(--card-radius);padding:20px;position:relative;min-width:0;background:var(--card);color:var(--card-ink);box-shadow:var(--shadow)}.char-head{display:flex;justify-content:space-between;gap:12px;align-items:start;border-bottom:1px solid var(--line);padding-bottom:13px}.char-no{font:600 10px var(--display);color:var(--accent);letter-spacing:.18em}.char-name{font-size:24px;font-weight:600}.original{font-size:11px;color:var(--muted);margin-left:7px}.codename{font:600 10px var(--display);padding:4px 7px;background:var(--sub);border-radius:999px;color:var(--main)}.catch{font-size:12px;color:var(--muted);font-style:italic;margin:9px 0 14px}.facts{display:flex;gap:7px;flex-wrap:wrap}.fact,.keyword{font:600 10px var(--display);border:1px solid var(--line);border-radius:999px;padding:5px 8px}.keywords{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}.keyword{background:var(--sub);color:var(--main);border:0}.char-images{display:grid;min-width:0;grid-template-columns:1.35fr .8fr;gap:9px;margin:15px 0}/* 각 행에서 전신이 가운데를 향하도록 배치 */
 .characters.layout-compact:not(.c1) .char:nth-child(odd) .char-images{grid-template-columns:.8fr 1.35fr}.characters.layout-compact:not(.c1) .char:nth-child(odd) .char-images>.fullbody{order:2}.characters.layout-compact:not(.c1) .char:nth-child(odd) .char-images>div:not(.fullbody){order:1}
 .characters.layout-wide.c2 .char:nth-child(1) .char-images,.characters.layout-wide.c3 .char:nth-child(1) .char-images,.characters.layout-wide.c4 .char:nth-child(odd) .char-images,.characters.layout-wide.c5 .char:nth-child(1) .char-images,.characters.layout-wide.c5 .char:nth-child(4) .char-images,.characters.layout-wide.c6 .char:nth-child(1) .char-images,.characters.layout-wide.c6 .char:nth-child(4) .char-images{grid-template-columns:.8fr 1.35fr}
 .characters.layout-wide.c2 .char:nth-child(1) .fullbody,.characters.layout-wide.c3 .char:nth-child(1) .fullbody,.characters.layout-wide.c4 .char:nth-child(odd) .fullbody,.characters.layout-wide.c5 .char:nth-child(1) .fullbody,.characters.layout-wide.c5 .char:nth-child(4) .fullbody,.characters.layout-wide.c6 .char:nth-child(1) .fullbody,.characters.layout-wide.c6 .char:nth-child(4) .fullbody{order:2}
@@ -86,7 +86,7 @@
 <button type="button" data-cmd="hiliteColor" title="Highlight">H</button>
 <button type="button" data-size="s" title="Small">S</button><button type="button" data-size="m" title="Normal">M</button><button type="button" data-size="l" title="Large">L</button><button type="button" data-size="xl" title="Extra Large">XL</button>
 </div>
-<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 16.3.4</div>
+<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 16.3.5</div>
 <div class="group"><h3>TEMPLATE</h3><label>인원 수<select id="count"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><label style="margin-top:8px">Character layout<select id="layoutMode" onchange="applyCharacterLayout()"><option value="compact">COMPACT · 1~2인 1행 / 3~4인 2행 / 5~6인 3행</option><option value="wide">WIDE · 1~3인 1행 / 4~6인 2행</option></select></label><button class="btn wide" onclick="applyCount()">APPLY TEMPLATE</button></div>
 <div class="group"><h3>SECTIONS</h3><label>표기 언어<select id="labelLang" onchange="setLanguage(this.value)"><option value="en">English</option><option value="ko">한국어</option></select></label><div class="toggle"><span>Timeline</span><input type="checkbox" checked onchange="toggleSection('timelineSection',this.checked)"></div><div class="toggle"><span>Scenes</span><input type="checkbox" checked onchange="toggleSection('scenesSection',this.checked)"></div><div class="toggle"><span>Credits</span><input type="checkbox" checked onchange="toggleSection('credits',this.checked)"></div></div>
 <div class="group"><h3>STYLE</h3><div class="row"><label>Main<input type="color" value="#66578a" oninput="css('--main',this.value)"></label><label>Accent<input type="color" value="#9c88c4" oninput="css('--accent',this.value)"></label></div><div class="row"><label>Background<input type="color" value="#f4f2f7" oninput="css('--bg',this.value)"></label><label>Paper<input type="color" value="#ffffff" oninput="css('--paper',this.value)"></label></div><div class="row"><label>Text<input type="color" value="#24202b" oninput="css('--ink',this.value)"></label><label>Sub color<input type="color" value="#dcd4ea" oninput="css('--sub',this.value)"></label></div><div class="row"><label>Card<input id="cardColor" type="color" value="#ffffff" oninput="setCardColor(this.value)"></label><label>Card Text<input id="cardTextColor" type="color" value="#24202b" oninput="setCardText(this.value)"></label></div><div class="toggle"><span>Card Text AUTO</span><input id="cardTextAuto" type="checkbox" checked onchange="toggleCardTextAuto(this.checked)"></div><label>본문 폰트<select onchange="css('--body',this.value)"><option value="'Hahmlet',serif">Hahmlet · 명조</option><option value="'Noto Serif KR',serif">Noto Serif KR · 명조</option><option value="'Nanum Myeongjo',serif">Nanum Myeongjo · 명조</option><option value="'Gowun Batang',serif">Gowun Batang · 명조</option><option value="'Song Myung',serif">Song Myung · 명조</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR · 고딕</option><option value="'MabinogiClassicR',sans-serif">마비옛체 · 게임/픽셀</option><option value="'Nanum Gothic',sans-serif">Nanum Gothic · 고딕</option><option value="'Gowun Dodum',sans-serif">Gowun Dodum · 고딕</option><option value="'Orbit',sans-serif">Orbit · 고딕</option><option value="'Gaegu',cursive">Gaegu · 손글씨</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script · 손글씨</option><option value="'Jua',sans-serif">Jua · 디스플레이</option><option value="'Do Hyeon',sans-serif">Do Hyeon · 디스플레이</option><option value="'Black Han Sans',sans-serif">Black Han Sans · 굵은 제목</option></select></label><label style="margin-top:8px">포인트 폰트<select onchange="css('--display',this.value)"><option value="'Montserrat',sans-serif">Montserrat</option><option value="'Press Start 2P',monospace">Press Start 2P · 8bit</option><option value="'MabinogiClassicR',sans-serif">마비옛체</option><option value="'Jua',sans-serif">Jua</option><option value="'Do Hyeon',sans-serif">Do Hyeon</option><option value="'Black Han Sans',sans-serif">Black Han Sans</option><option value="'Gaegu',cursive">Gaegu</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script</option><option value="'Noto Serif KR',serif">Noto Serif KR</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR</option></select></label></div>
@@ -188,20 +188,18 @@ function syncCharacterRows(){
   if(!cards.length)return;
   rowSyncBusy=true;
 
-  // Every block that affects the vertical start position of later blocks.
-  const getParts=card=>[
-    card.querySelector('.char-head'),
-    card.querySelector('.catch'),
-    card.querySelector('.facts'),
-    card.querySelector('.keywords'),
+  const sections=card=>[
     card.querySelector('.char-images'),
     ...card.querySelectorAll('.detail'),
     card.querySelector('.notes')
   ].filter(Boolean);
 
-  cards.forEach(card=>getParts(card).forEach(el=>{
-    el.style.minHeight='';
-    el.style.height='';
+  // Remove only offsets created by this synchronizer.
+  cards.forEach(card=>sections(card).forEach(el=>{
+    if(el.dataset.syncBaseMargin!==undefined){
+      el.style.marginTop=el.dataset.syncBaseMargin;
+      delete el.dataset.syncBaseMargin;
+    }
   }));
 
   const rows=[];
@@ -214,17 +212,27 @@ function syncCharacterRows(){
 
   rows.forEach(row=>{
     if(row.cards.length<2)return;
-    const all=row.cards.map(getParts);
-    const count=Math.max(...all.map(x=>x.length));
+    const count=Math.max(...row.cards.map(c=>sections(c).length));
 
-    // Synchronize each corresponding block, from header all the way to MUST/NG.
-    // Because every preceding block is equalized, every following section begins
-    // on the exact same baseline.
     for(let idx=0;idx<count;idx++){
-      const blocks=all.map(parts=>parts[idx]).filter(Boolean);
-      if(blocks.length<2)continue;
-      const max=Math.max(...blocks.map(el=>Math.ceil(el.getBoundingClientRect().height)));
-      blocks.forEach(el=>el.style.minHeight=max+'px');
+      const entries=row.cards.map(card=>{
+        const el=sections(card)[idx];
+        return el?{card,el}:null;
+      }).filter(Boolean);
+      if(entries.length<2)continue;
+
+      // Reflow first, then compare section starts relative to each card.
+      entries.forEach(({el})=>void el.offsetTop);
+      const tops=entries.map(({card,el})=>el.getBoundingClientRect().top-card.getBoundingClientRect().top);
+      const target=Math.max(...tops);
+
+      entries.forEach(({card,el},j)=>{
+        const cs=getComputedStyle(el);
+        const base=parseFloat(cs.marginTop)||0;
+        const delta=Math.max(0,target-tops[j]);
+        el.dataset.syncBaseMargin=base+'px';
+        el.style.marginTop=(base+delta)+'px';
+      });
     }
   });
   rowSyncBusy=false;
@@ -260,10 +268,6 @@ async function savePNG(){
   syncCharacterRows();
   await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
   await Promise.all([...source.querySelectorAll('img')].map(im=>im.complete?Promise.resolve():new Promise(res=>{im.onload=im.onerror=res})));
-  syncFullBodies();
-  syncCharacterRows();
-  void source.offsetHeight;
-  await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
 
   // Export the LIVE preview DOM instead of a detached clone.
   // html2canvas can calculate transformed full-body images differently in an off-screen clone,
@@ -276,6 +280,21 @@ async function savePNG(){
   void source.offsetHeight;
   await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
 
+  // Freeze full-body images to the exact live-preview pixel geometry.
+  // html2canvas otherwise re-evaluates percentage/calc/transform positioning.
+  const frozenBodies=[...source.querySelectorAll('.fullbody img')].map(im=>{
+    const box=im.parentElement, ir=im.getBoundingClientRect(), br=box.getBoundingClientRect();
+    const old=im.getAttribute('style')||'';
+    im.style.setProperty('left',(ir.left-br.left)+'px','important');
+    im.style.setProperty('bottom',(br.bottom-ir.bottom)+'px','important');
+    im.style.setProperty('width',ir.width+'px','important');
+    im.style.setProperty('height',ir.height+'px','important');
+    im.style.setProperty('transform','none','important');
+    return {im,old};
+  });
+  void source.offsetHeight;
+  await new Promise(r=>requestAnimationFrame(r));
+
   const rect=source.getBoundingClientRect();
   const canvas=await html2canvas(source,{
     scale:2,useCORS:true,allowTaint:false,
@@ -286,6 +305,7 @@ async function savePNG(){
     windowHeight:Math.ceil(document.documentElement.clientHeight),
     scrollX:0,scrollY:0
   });
+  frozenBodies.forEach(({im,old})=>old?im.setAttribute('style',old):im.removeAttribute('style'));
   const blob=await new Promise(res=>canvas.toBlob(res,'image/png')); if(!blob) throw new Error('PNG 파일 생성에 실패했습니다.');
   const url=URL.createObjectURL(blob),a=document.createElement('a'); a.download='pair-orbit.png'; a.href=url; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1500);
  }catch(err){console.error(err);alert('PNG 저장 중 오류가 발생했습니다.\n'+(err?.message||err))}
@@ -369,7 +389,7 @@ function saveJSON(){
     const payload={
       format:'pair-orbit-maker',
       schemaVersion:DATA_SCHEMA_VERSION,
-      appVersion:'16.3.4',
+      appVersion:'16.3.5',
       savedAt:new Date().toISOString(),
       data:{
         paperHTML:document.getElementById('capture').innerHTML,
