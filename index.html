@@ -218,7 +218,7 @@
 <button type="button" data-cmd="hiliteColor" title="Highlight">H</button>
 <button type="button" data-size="s" title="Small">S</button><button type="button" data-size="m" title="Normal">M</button><button type="button" data-size="l" title="Large">L</button><button type="button" data-size="xl" title="Extra Large">XL</button>
 </div>
-<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 16.3.9</div>
+<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 16.4.0</div>
 <div class="group"><h3>TEMPLATE</h3><label>인원 수<select id="count"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><label style="margin-top:8px">Character layout<select id="layoutMode" onchange="applyCharacterLayout()"><option value="compact">COMPACT · 1~2인 1행 / 3~4인 2행 / 5~6인 3행</option><option value="wide">WIDE · 1~3인 1행 / 4~6인 2행</option></select></label><button class="btn wide" onclick="applyCount()">APPLY TEMPLATE</button></div>
 <div class="group"><h3>SECTIONS</h3><label>표기 언어<select id="labelLang" onchange="setLanguage(this.value)"><option value="en">English</option><option value="ko">한국어</option></select></label><div class="toggle"><span>Timeline</span><input type="checkbox" checked onchange="toggleSection('timelineSection',this.checked)"></div><div class="toggle"><span>Scenes</span><input type="checkbox" checked onchange="toggleSection('scenesSection',this.checked)"></div><div class="toggle"><span>Credits</span><input type="checkbox" checked onchange="toggleSection('credits',this.checked)"></div></div>
 <div class="group"><h3>STYLE</h3><div class="row"><label>Main<input type="color" value="#66578a" oninput="css('--main',this.value)"></label><label>Accent<input type="color" value="#9c88c4" oninput="css('--accent',this.value)"></label></div><div class="row"><label>Background<input type="color" value="#f4f2f7" oninput="css('--bg',this.value)"></label><label>Paper<input type="color" value="#ffffff" oninput="css('--paper',this.value)"></label></div><div class="row"><label>Text<input type="color" value="#24202b" oninput="css('--ink',this.value)"></label><label>Sub color<input type="color" value="#dcd4ea" oninput="css('--sub',this.value)"></label></div><div class="row"><label>Card<input id="cardColor" type="color" value="#ffffff" oninput="setCardColor(this.value)"></label><label>Card Text<input id="cardTextColor" type="color" value="#24202b" oninput="setCardText(this.value)"></label></div><div class="toggle"><span>Card Text AUTO</span><input id="cardTextAuto" type="checkbox" checked onchange="toggleCardTextAuto(this.checked)"></div><label>본문 폰트<select onchange="css('--body',this.value)"><option value="'Hahmlet',serif">Hahmlet · 명조</option><option value="'Noto Serif KR',serif">Noto Serif KR · 명조</option><option value="'Nanum Myeongjo',serif">Nanum Myeongjo · 명조</option><option value="'Gowun Batang',serif">Gowun Batang · 명조</option><option value="'Song Myung',serif">Song Myung · 명조</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR · 고딕</option><option value="'MabinogiClassicR',sans-serif">마비옛체 · 게임/픽셀</option><option value="'Nanum Gothic',sans-serif">Nanum Gothic · 고딕</option><option value="'Gowun Dodum',sans-serif">Gowun Dodum · 고딕</option><option value="'Orbit',sans-serif">Orbit · 고딕</option><option value="'Gaegu',cursive">Gaegu · 손글씨</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script · 손글씨</option><option value="'Jua',sans-serif">Jua · 디스플레이</option><option value="'Do Hyeon',sans-serif">Do Hyeon · 디스플레이</option><option value="'Black Han Sans',sans-serif">Black Han Sans · 굵은 제목</option></select></label><label style="margin-top:8px">포인트 폰트<select onchange="css('--display',this.value)"><option value="'Montserrat',sans-serif">Montserrat</option><option value="'Press Start 2P',monospace">Press Start 2P · 8bit</option><option value="'MabinogiClassicR',sans-serif">마비옛체</option><option value="'Jua',sans-serif">Jua</option><option value="'Do Hyeon',sans-serif">Do Hyeon</option><option value="'Black Han Sans',sans-serif">Black Han Sans</option><option value="'Gaegu',cursive">Gaegu</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script</option><option value="'Noto Serif KR',serif">Noto Serif KR</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR</option></select></label></div>
@@ -396,64 +396,140 @@ let selectedSticker=null,stickerZ=20;function addSticker(input){let f=input.file
 async function savePNG(){
  const btn=event?.currentTarget, oldText=btn?.textContent;
  const source=document.getElementById('capture');
- let hidden=[];
+ let stage=null;
  try{
   if(btn){btn.disabled=true;btn.textContent='RENDERING…'}
   if(!window.html2canvas) throw new Error('PNG 라이브러리를 불러오지 못했습니다. 인터넷 연결 후 페이지를 다시 열어주세요.');
   if(document.fonts?.ready) await document.fonts.ready;
+
   syncFullBodies();
   syncCharacterRows();
   await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
   await Promise.all([...source.querySelectorAll('img')].map(im=>im.complete?Promise.resolve():new Promise(res=>{im.onload=im.onerror=res})));
 
-  // Export the LIVE preview DOM instead of a detached clone.
-  // html2canvas can calculate transformed full-body images differently in an off-screen clone,
-  // which caused the exported PNG to enlarge them. Temporarily hide editor-only UI instead.
-  hidden=[...source.querySelectorAll('[data-export-ui="true"]')].map(el=>({el,display:el.style.display}));
-  hidden.forEach(x=>x.el.style.display='none');
-  source.classList.add('is-exporting');
-  syncFullBodies();
-  syncCharacterRows();
-  void source.offsetHeight;
+  /* v16.4.0
+     PNG는 현재 편집 화면을 "다시 레이아웃"하지 않는다.
+     현재 paper의 실제 폭/각 이미지의 실제 픽셀 위치를 먼저 읽고,
+     같은 폭의 독립된 export stage에 clone을 만든 뒤 그 상태만 캡처한다. */
+  const sr=source.getBoundingClientRect();
+  const exportWidth=Math.round(sr.width);
+
+  stage=document.createElement('div');
+  stage.id='pngExportStage';
+  Object.assign(stage.style,{
+    position:'fixed', left:'0', top:'0',
+    width:exportWidth+'px',
+    zIndex:'-2147483647',
+    pointerEvents:'none',
+    background:'transparent'
+  });
+
+  const clone=source.cloneNode(true);
+  clone.id='capture-export-clone';
+  clone.classList.add('is-exporting');
+  clone.style.setProperty('width',exportWidth+'px','important');
+  clone.style.setProperty('min-width',exportWidth+'px','important');
+  clone.style.setProperty('max-width',exportWidth+'px','important');
+  clone.style.setProperty('margin','0','important');
+  clone.style.setProperty('box-sizing','border-box','important');
+  clone.style.setProperty('transform','none','important');
+
+  clone.querySelectorAll('[data-export-ui="true"]').forEach(el=>el.remove());
+  clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+
+  stage.appendChild(clone);
+  document.body.appendChild(stage);
+
+  /* Copy the live preview's exact image rectangles.
+     This includes pair image, portraits, scenes and full-body images. */
+  const liveImgs=[...source.querySelectorAll('.imgbox img')];
+  const cloneImgs=[...clone.querySelectorAll('.imgbox img')];
+
+  liveImgs.forEach((im,i)=>{
+    const cim=cloneImgs[i];
+    if(!cim)return;
+    const box=im.parentElement;
+    const cbox=cim.parentElement;
+    const ir=im.getBoundingClientRect();
+    const br=box.getBoundingClientRect();
+
+    cbox.style.setProperty('position','relative','important');
+    cbox.style.setProperty('overflow','hidden','important');
+
+    cim.style.setProperty('position','absolute','important');
+    cim.style.setProperty('left',(ir.left-br.left)+'px','important');
+    cim.style.setProperty('top',(ir.top-br.top)+'px','important');
+    cim.style.setProperty('right','auto','important');
+    cim.style.setProperty('bottom','auto','important');
+    cim.style.setProperty('width',ir.width+'px','important');
+    cim.style.setProperty('height',ir.height+'px','important');
+    cim.style.setProperty('min-width','0','important');
+    cim.style.setProperty('min-height','0','important');
+    cim.style.setProperty('max-width','none','important');
+    cim.style.setProperty('max-height','none','important');
+    cim.style.setProperty('object-fit','fill','important');
+    cim.style.setProperty('transform','none','important');
+    cim.style.setProperty('transform-origin','0 0','important');
+  });
+
+  /* Stickers also use their live pixel geometry. */
+  const liveStickers=[...source.querySelectorAll('.sticker')];
+  const cloneStickers=[...clone.querySelectorAll('.sticker')];
+  liveStickers.forEach((im,i)=>{
+    const cim=cloneStickers[i]; if(!cim)return;
+    const ir=im.getBoundingClientRect(), cr=source.getBoundingClientRect();
+    cim.style.setProperty('left',(ir.left-cr.left)+'px','important');
+    cim.style.setProperty('top',(ir.top-cr.top)+'px','important');
+    cim.style.setProperty('width',ir.width+'px','important');
+  });
+
+  /* Character cards must keep the exact preview column width.
+     This prevents the export document from collapsing into the <=900px mobile layout. */
+  const liveChars=[...source.querySelectorAll('#characters > .char')];
+  const cloneChars=[...clone.querySelectorAll('#characters > .char')];
+  liveChars.forEach((el,i)=>{
+    const cel=cloneChars[i]; if(!cel)return;
+    cel.style.setProperty('min-width',el.getBoundingClientRect().width+'px','important');
+  });
+
   await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
 
-  // Freeze every uploaded image to the exact LIVE preview rectangle.
-  // This avoids html2canvas recomputing transform/percent geometry differently.
-  const frozenImages=[...source.querySelectorAll('.imgbox img')].map(im=>{
-    const box=im.parentElement, ir=im.getBoundingClientRect(), br=box.getBoundingClientRect();
-    const old=im.getAttribute('style')||'';
-    im.style.setProperty('left',(ir.left-br.left)+'px','important');
-    im.style.setProperty('top',(ir.top-br.top)+'px','important');
-    im.style.setProperty('bottom','auto','important');
-    im.style.setProperty('width',ir.width+'px','important');
-    im.style.setProperty('height',ir.height+'px','important');
-    im.style.setProperty('min-width','0','important');
-    im.style.setProperty('min-height','0','important');
-    im.style.setProperty('max-width','none','important');
-    im.style.setProperty('max-height','none','important');
-    im.style.setProperty('transform','none','important');
-    return {im,old};
-  });
-  void source.offsetHeight;
-  await new Promise(r=>requestAnimationFrame(r));
+  const exportHeight=Math.ceil(clone.scrollHeight);
+  stage.style.height=exportHeight+'px';
 
-  const rect=source.getBoundingClientRect();
-  const canvas=await html2canvas(source,{
-    scale:2,useCORS:true,allowTaint:false,
+  const desktopViewport=Math.max(
+    document.documentElement.clientWidth,
+    source.classList.contains('canvas-wide') ? 1800 : 1280
+  );
+
+  const canvas=await html2canvas(clone,{
+    scale:2,
+    useCORS:true,
+    allowTaint:false,
     backgroundColor:getComputedStyle(source).backgroundColor||'#ffffff',
-    logging:false,imageTimeout:15000,
-    width:Math.ceil(source.scrollWidth),height:Math.ceil(source.scrollHeight),
-    windowWidth:Math.ceil(source.scrollWidth),
-    windowHeight:Math.ceil(source.scrollHeight),
-    scrollX:0,scrollY:0
+    logging:false,
+    imageTimeout:15000,
+    width:exportWidth,
+    height:exportHeight,
+    windowWidth:desktopViewport,
+    windowHeight:Math.max(document.documentElement.clientHeight,900),
+    scrollX:0,
+    scrollY:0,
+    x:0,
+    y:0
   });
-  frozenImages.forEach(({im,old})=>old?im.setAttribute('style',old):im.removeAttribute('style'));
-  const blob=await new Promise(res=>canvas.toBlob(res,'image/png')); if(!blob) throw new Error('PNG 파일 생성에 실패했습니다.');
-  const url=URL.createObjectURL(blob),a=document.createElement('a'); a.download='pair-orbit.png'; a.href=url; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1500);
- }catch(err){console.error(err);alert('PNG 저장 중 오류가 발생했습니다.\n'+(err?.message||err))}
- finally{
-  source?.classList.remove('is-exporting');
-  hidden.forEach(x=>x.el.style.display=x.display);
+
+  const blob=await new Promise(res=>canvas.toBlob(res,'image/png'));
+  if(!blob) throw new Error('PNG 파일 생성에 실패했습니다.');
+  const url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.download='pair-orbit.png'; a.href=url;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+ }catch(err){
+  console.error(err);
+  alert('PNG 저장 중 오류가 발생했습니다.\n'+(err?.message||err));
+ }finally{
+  stage?.remove();
   if(btn){btn.disabled=false;btn.textContent=oldText||'SAVE AS PNG'}
  }
 }
@@ -531,7 +607,7 @@ function saveJSON(){
     const payload={
       format:'pair-orbit-maker',
       schemaVersion:DATA_SCHEMA_VERSION,
-      appVersion:'16.3.9',
+      appVersion:'16.4.0',
       savedAt:new Date().toISOString(),
       data:{
         paperHTML:document.getElementById('capture').innerHTML,

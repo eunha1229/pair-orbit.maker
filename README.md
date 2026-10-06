@@ -1,13 +1,12 @@
-# PAIR ORBIT MAKER v16.3.9
+# PAIR ORBIT MAKER v16.4.0
 
-Image geometry hotfix
-- Uploaded pair/portrait/scene images keep their original aspect ratio.
-- Scale/X/Y use one centered transform model.
-- JSON load reapplies saved image transforms.
-- PNG export freezes every image to the exact live-preview pixel rectangle before capture.
-- Export viewport now follows the paper itself rather than the editor/browser viewport.
-- Full-body export keeps the existing bottom-anchored geometry.
-- Korean/CJK prose justification uses keep-all + inter-character justification.
+PNG export rebuild
+- Export no longer captures/reflows the live editor paper directly.
+- Creates a fixed-width export clone matching the exact current preview width.
+- Forces a desktop capture viewport so the <=900px mobile CSS cannot activate during export.
+- Freezes uploaded image rectangles from the live preview into pixel coordinates.
+- Preserves pair image / portrait / scene / full-body placement and dimensions.
+- Keeps character card widths from collapsing during capture.
 
 PAIR ORBIT MAKER
 made by @2by4_JourNey
