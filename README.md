@@ -1,15 +1,22 @@
-# PAIR ORBIT MAKER v16.3.3
+# PAIR ORBIT MAKER v16.3.4
 
-## Fixes
-- 전신 Scale을 CSS transform 확대가 아니라 실제 이미지 height 계산에 반영하도록 변경
-  - 미리보기와 PNG에서 같은 크기로 렌더링
-  - html2canvas에서 전신만 거대해지던 문제 제거
-  - Full Body X / 신장 비례 / 발끝 정렬 유지
-- 캐릭터 행 높이 정렬 로직 수정
-  - 이전 버전의 `.detail:nth-of-type()` 선택자가 실제 DOM 구조와 맞지 않던 문제 수정
-  - 같은 행의 캐릭터끼리 전신 영역, 특징 및 외관, 동물화, 소품/상징물, 필수/NG를 각각 독립적으로 높이 동기화
-  - 본문 길이가 달라도 다음 섹션 시작선이 맞도록 처리
-- PNG 저장 직전 실제 레이아웃을 다시 계산한 뒤 캡처
+## v16.3.4
+- 캐릭터 높이 정렬을 '본문 섹션만'이 아니라 카드 상단부터 누적 정렬하도록 수정
+  - 이름/헤더
+  - 캐치프레이즈
+  - AGE/HEIGHT/BUILD
+  - 키워드
+  - 이미지 영역
+  - 특징 및 외관
+  - 동물화
+  - 소품/상징물
+  - 필수/NG
+- 따라서 한쪽 상단 텍스트가 한 줄 더 차지해도 아래 모든 섹션 시작선이 맞음
+- 전신 이미지를 absolute + translateX 방식에서 일반 flex 배치로 변경
+  - html2canvas가 PNG 저장 시 좌표를 다르게 해석하던 원인을 제거
+  - Full Body X는 relative left 값으로 그대로 지원
+  - 발끝 정렬/신장 비례/Full Body Scale 유지
+- PNG 캡처의 강제 scrollY 보정을 제거하고 저장 직전 레이아웃을 재계산
 
 PAIR ORBIT MAKER
 made by @2by4_JourNey
