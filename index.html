@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PAIR ORBIT MAKER</title>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PAIR ORBIT MAKER v16.5.20</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gaegu:wght@300;400;700&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Hahmlet:wght@300;400;600;700&family=Jua&family=Montserrat:wght@400;600;700&family=Nanum+Gothic:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@300;400;600;700&family=Noto+Serif+KR:wght@300;400;600;700&family=Orbit&family=Press+Start+2P&family=Song+Myung&display=swap');
 :root{--bg:#f4f2f7;--paper:#fff;--ink:#24202b;--muted:#82798d;--main:#66578a;--sub:#dcd4ea;--accent:#9c88c4;--line:#ddd8e3;--radius:18px;--card-radius:16px;--scene-radius:12px;--shadow:none;--section-gap:42px;--card:#ffffff;--card-ink:#24202b;--pattern:#8aa8d8;--pattern-opacity:.22;--pattern-rgba:rgba(138,168,216,.22);--pattern-rgba-soft:rgba(138,168,216,.12);--pattern-size:24px;--paper-border:#66578a;--body:'Hahmlet',serif;--display:'Montserrat',sans-serif;--orbit-color:#66578a;--orbit-alpha:.38;--orbit-rgba:rgba(102,87,138,.38);--orbit-rgba-strong:rgba(102,87,138,.50);--orbit-opacity:.38;--orbit-size:1;--orbit-font-size:12px;--pair-title-size:42px;--char-name-size:24px;--scene-title-size:16px;--event-title-size:16px;--body-scale-pct:100%;--label-scale-pct:100%;--meta-scale-pct:100%;--fullbody-scale:1.15;--fullbody-x:0px}
@@ -91,76 +91,6 @@
 
 .typo-value{float:right;font-size:10px;color:#aaa}
 </style>
-<style id="proseJustifyStyles">
-.paper .hero .desc,
-.paper .detail p,
-.paper .note .editable,
-.paper .event-desc,
-.paper .scene-desc{
-  text-align:justify;
-  text-justify:inter-character;
-  word-break:keep-all;
-  overflow-wrap:break-word;
-}
-</style>
-
-<style id="proseJustifyFixV1637">
-.paper .hero .desc,
-.paper .detail p,
-.paper .detail-text,
-.paper .note .editable,
-.paper .event-desc,
-.paper .scene-desc,
-.paper .credits{
-  text-align:justify !important;
-  text-align-last:left !important;
-  text-justify:inter-character !important;
-  word-break:normal !important;
-  overflow-wrap:anywhere;
-}
-
-
-</style>
-
-
-<style id="proseAndEdgeFixV1638">
-.paper .hero .desc,
-.paper .detail p,
-.paper .detail-text,
-.paper .note .editable,
-.paper .event-desc,
-.paper .scene-desc,
-.paper .credits{
-  text-align:justify !important;
-  text-align-last:left !important;
-  text-justify:inter-character !important;
-  word-break:normal !important;
-  overflow-wrap:anywhere;
-}
-
-/* Rich-text runs must remain inline runs. Never give them their own last-line alignment. */
-.paper .hero .desc span,
-.paper .detail p span,
-.paper .detail-text span,
-.paper .note .editable span,
-.paper .event-desc span,
-.paper .scene-desc span,
-.paper .credits span{
-  text-align:inherit !important;
-  text-align-last:auto !important;
-  word-break:inherit !important;
-}
-
-/* Edge Accent is horizontal only. Paper Border remains the only four-sided frame. */
-.paper.edge-top,
-.paper.edge-bottom,
-.paper.edge-both{
-  border-left-width:0 !important;
-  border-right-width:0 !important;
-}
-</style>
-
-
 <style id="imageGeometryFixV1639">
 /* Never distort uploaded images: one dimension is auto, so intrinsic aspect ratio survives. */
 .imgbox:not(.fullbody) img{
@@ -203,6 +133,255 @@
 }
 </style>
 
+
+
+
+
+<style id="v1652CleanRender">
+/* One authoritative prose rule. No pre-wrap/inter-character/legacy overrides. */
+.paper .hero .desc,
+.paper .detail-text,
+.paper .note .editable,
+.paper .event-desc,
+.paper .scene-desc,
+.paper .credits{
+  text-align:justify !important;
+  text-align-last:left !important;
+  white-space:normal !important;
+  word-break:normal !important;
+  overflow-wrap:break-word !important;
+  word-spacing:normal !important;
+  letter-spacing:normal !important;
+}
+.paper .hero .desc > div,.paper .detail-text > div,.paper .note .editable > div,
+.paper .event-desc > div,.paper .scene-desc > div,.paper .credits > div,
+.paper .hero .desc > p,.paper .detail-text > p,.paper .note .editable > p,
+.paper .event-desc > p,.paper .scene-desc > p,.paper .credits > p{
+  display:block !important;
+  width:auto !important;
+  max-width:none !important;
+  min-width:0 !important;
+  margin:.42em 0 0 !important;
+  padding:0 !important;
+  position:static !important;
+  float:none !important;
+  text-align:inherit !important;
+  white-space:normal !important;
+}
+.paper .hero .desc > :first-child,.paper .detail-text > :first-child,
+.paper .note .editable > :first-child,.paper .event-desc > :first-child,
+.paper .scene-desc > :first-child,.paper .credits > :first-child{margin-top:0!important}
+.paper .hero .desc span,.paper .detail-text span,.paper .note .editable span,
+.paper .event-desc span,.paper .scene-desc span,.paper .credits span,
+.paper .hero .desc font,.paper .detail-text font,.paper .note .editable font,
+.paper .event-desc font,.paper .scene-desc font,.paper .credits font{
+  display:inline !important;
+  position:static !important;
+  float:none !important;
+  width:auto !important;
+  max-width:none !important;
+  min-width:0 !important;
+  margin:0 !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  text-align:inherit !important;
+  text-align-last:auto !important;
+  white-space:normal !important;
+  word-spacing:normal !important;
+  letter-spacing:inherit !important;
+  line-height:inherit !important;
+}
+
+/* Live edge: clean full-width bars, independent of border radius geometry. */
+.paper.edge-accent-top,.paper.edge-accent-both{
+  border:0 !important;
+  box-shadow:0 15px 50px #332b4420 !important;
+}
+.paper.edge-accent-top::before,.paper.edge-accent-both::before,
+.paper.edge-accent-both::after{
+  content:"" !important;
+  display:block !important;
+  position:absolute !important;
+  z-index:100 !important;
+  left:0 !important; right:0 !important;
+  height:6px !important;
+  background:var(--paper-border) !important;
+  pointer-events:none !important;
+}
+.paper.edge-accent-top::before,.paper.edge-accent-both::before{top:0!important;border-radius:var(--paper-radius) var(--paper-radius) 0 0}
+.paper.edge-accent-both::after{bottom:0!important;border-radius:0 0 var(--paper-radius) var(--paper-radius)}
+.paper.edge-accent-top::after{content:none!important;display:none!important}
+
+/* Export-only physical bars injected into cloned DOM. */
+.export-edge-bar{position:absolute!important;left:0!important;right:0!important;height:6px!important;z-index:10000!important;background:var(--paper-border)!important;pointer-events:none!important}
+.export-edge-bar.top{top:0!important}
+.export-edge-bar.bottom{bottom:0!important}
+</style>
+
+
+<style id="v1653ExportParity">
+/* During PNG capture the edge is supplied by one physical bar only. */
+.paper.export-render.edge-accent-top::before,
+.paper.export-render.edge-accent-top::after,
+.paper.export-render.edge-accent-both::before,
+.paper.export-render.edge-accent-both::after{
+  content:none !important;
+  display:none !important;
+}
+.paper.export-render.edge-accent-top,
+.paper.export-render.edge-accent-both{
+  border:0 !important;
+  box-shadow:0 15px 50px #332b4420 !important;
+}
+/* Prevent html2canvas from inheriting browser editing artifacts. */
+.paper.export-render [contenteditable],
+.paper.export-render .rich-editable{
+  caret-color:transparent !important;
+  outline:none !important;
+}
+</style>
+
+
+<style id="v1654EdgeAndExportFix">
+/* One renderer for edge accents: no pseudo-elements, no injected bars. */
+.paper.edge-accent-top::before,.paper.edge-accent-top::after,
+.paper.edge-accent-both::before,.paper.edge-accent-both::after{content:none!important;display:none!important}
+.paper.edge-accent-top{border:0!important;box-shadow:inset 0 6px 0 var(--paper-border),0 15px 50px #332b4420!important}
+.paper.edge-accent-both{border:0!important;box-shadow:inset 0 6px 0 var(--paper-border),inset 0 -6px 0 var(--paper-border),0 15px 50px #332b4420!important}
+.paper.edge-accent-left{border:0!important;box-shadow:inset 7px 0 0 var(--paper-border),0 15px 50px #332b4420!important}
+.export-edge-bar{display:none!important}
+/* Export text: keep browser line metrics deterministic for inline rich runs. */
+.paper.export-render .detail-text,.paper.export-render .desc{
+  text-align:justify!important;text-align-last:left!important;
+  white-space:normal!important;word-break:keep-all!important;overflow-wrap:break-word!important;
+}
+.paper.export-render .detail-text *,.paper.export-render .desc *{
+  letter-spacing:inherit!important;word-spacing:normal!important;line-height:inherit!important;
+}
+</style>
+
+<style id="v1655ExactPreviewExport">
+/* PNG parity: rich-text highlight and background decoration must be the same paint
+   that the live editor uses. No export-only pattern/highlight renderer. */
+.paper.export-render mark,
+.paper.export-render .rt-highlight{
+  background:var(--accent) !important;
+  color:inherit !important;
+}
+</style>
+
+
+<style id="v1656ExactPattern">
+:root{
+ --orbit-pattern-tile:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='72' viewBox='0 0 144 72'%3E%3Cpath d='M0 8L72 44' fill='none' stroke='%236c55d8' stroke-opacity='.105' stroke-width='1'/%3E%3Ccircle cx='96' cy='56' r='1.25' fill='%238f78ef' fill-opacity='.20'/%3E%3C/svg%3E");
+}
+.paper{
+ background-color:var(--paper)!important;
+ background-image:var(--orbit-pattern-tile)!important;
+ background-repeat:repeat!important;
+ background-size:144px 72px!important;
+ background-position:0 0!important;
+}
+</style>
+
+
+<style id="v1657BrowserPaintExport">
+.paper.export-render [contenteditable],
+.paper.export-render .rich-editable{
+  caret-color:transparent!important;
+  outline:none!important;
+}
+</style>
+
+
+
+<style id="v16514AuthoritativeLiveEdge">
+/* Live editor only: one clean top/bottom edge. */
+.paper.edge-accent-top,.paper.edge-accent-both{
+  border:0!important;
+  box-shadow:0 15px 50px #332b4420!important;
+}
+.paper.edge-accent-top::before,.paper.edge-accent-both::before,
+.paper.edge-accent-both::after{
+  content:""!important;display:block!important;position:absolute!important;
+  left:0!important;right:0!important;height:6px!important;
+  background:var(--paper-border)!important;z-index:10000!important;pointer-events:none!important;
+}
+.paper.edge-accent-top::before,.paper.edge-accent-both::before{top:0!important}
+.paper.edge-accent-both::after{bottom:0!important}
+.paper.edge-accent-top::after{content:none!important;display:none!important}
+/* Capture clone gets no DOM edge; PNG edge is painted at the final bitmap boundary. */
+.paper.export-render::before,.paper.export-render::after{content:none!important;display:none!important}
+</style>
+
+
+<style id="v16516Repair">
+/* v16.5.20 — edge accent is a dedicated DOM layer.
+   Never touch .paper pseudo-elements: Orbit decoration owns those. */
+.paper > .edge-accent-layer{
+  position:absolute!important;
+  inset:0!important;
+  z-index:9999!important;
+  pointer-events:none!important;
+  overflow:hidden!important;
+  border-radius:inherit!important;
+}
+.paper > .edge-accent-layer > i{
+  display:block!important;
+  position:absolute!important;
+  margin:0!important;padding:0!important;border:0!important;
+  background:var(--paper-border)!important;
+}
+.paper > .edge-accent-layer .ea-top{
+  left:0!important;right:0!important;top:0!important;height:6px!important;
+}
+.paper > .edge-accent-layer .ea-bottom{
+  left:0!important;right:0!important;bottom:0!important;height:6px!important;
+}
+.paper > .edge-accent-layer .ea-left{
+  left:0!important;top:0!important;bottom:0!important;width:7px!important;
+}
+
+/* Legacy edge paint must not contribute visual lines.
+   Only neutralize properties on the PAPER itself; never pseudo-elements. */
+.paper.edge-accent-top,
+.paper.edge-accent-both,
+.paper.edge-accent-left{
+  border-top-width:0!important;
+  border-bottom-width:0!important;
+  border-left-width:0!important;
+}
+
+/* ITEM / SYMBOL: Enter-created blocks are plain lines, not paragraphs. */
+.paper .detail-text > div,
+.paper .detail-text > p{
+  display:block!important;
+  margin:0!important;
+  padding:0!important;
+  min-height:0!important;
+  line-height:inherit!important;
+}
+.paper .detail-text br{line-height:inherit!important}
+
+/* html2canvas clone uses the exact same typography. */
+.paper.export-render .detail-text > div,
+.paper.export-render .detail-text > p{
+  margin:0!important;padding:0!important;line-height:inherit!important;
+}
+</style>
+
+
+<style id="v16517Isolation">
+.paper{position:relative!important}
+.paper>.edge-accent-layer{
+ position:absolute!important;inset:0!important;z-index:2147483000!important;
+ pointer-events:none!important;overflow:hidden!important;border-radius:inherit!important;
+}
+.paper>.edge-accent-layer>i{position:absolute!important;display:block!important;background:#17156f!important}
+.paper>.edge-accent-layer>.ea-top{top:0!important;left:0!important;right:0!important;height:6px!important}
+.paper>.edge-accent-layer>.ea-bottom{bottom:0!important;left:0!important;right:0!important;height:6px!important}
+.paper>.edge-accent-layer>.ea-left{top:0!important;bottom:0!important;left:0!important;width:7px!important}
+</style>
 </head><body><div class="app"><main class="workspace"><article class="paper" id="capture">
 <section class="hero"><div class="eyebrow editable" contenteditable>PAIR ARCHIVE</div><h1 class="pair-title editable" contenteditable>PAIR NAME</h1><div class="pair-catch editable" contenteditable>“Write your pair catchphrase here.”</div><div class="pair-grid"><div class="imgbox ratio-4-3" id="pairImageBox">PAIR IMAGE</div><div class="desc editable" contenteditable>두 사람 혹은 팀의 관계, 세계관, 첫 만남과 현재의 관계 등을 자유롭게 적어주세요.</div></div></section>
 <div class="section-title" data-i18n="characters">CHARACTERS</div><section class="characters c2 layout-compact" id="characters"></section>
@@ -218,7 +397,7 @@
 <button type="button" data-cmd="hiliteColor" title="Highlight">H</button>
 <button type="button" data-size="s" title="Small">S</button><button type="button" data-size="m" title="Normal">M</button><button type="button" data-size="l" title="Large">L</button><button type="button" data-size="xl" title="Extra Large">XL</button>
 </div>
-<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 16.4.0</div>
+<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 16.5.20</div>
 <div class="group"><h3>TEMPLATE</h3><label>인원 수<select id="count"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><label style="margin-top:8px">Character layout<select id="layoutMode" onchange="applyCharacterLayout()"><option value="compact">COMPACT · 1~2인 1행 / 3~4인 2행 / 5~6인 3행</option><option value="wide">WIDE · 1~3인 1행 / 4~6인 2행</option></select></label><button class="btn wide" onclick="applyCount()">APPLY TEMPLATE</button></div>
 <div class="group"><h3>SECTIONS</h3><label>표기 언어<select id="labelLang" onchange="setLanguage(this.value)"><option value="en">English</option><option value="ko">한국어</option></select></label><div class="toggle"><span>Timeline</span><input type="checkbox" checked onchange="toggleSection('timelineSection',this.checked)"></div><div class="toggle"><span>Scenes</span><input type="checkbox" checked onchange="toggleSection('scenesSection',this.checked)"></div><div class="toggle"><span>Credits</span><input type="checkbox" checked onchange="toggleSection('credits',this.checked)"></div></div>
 <div class="group"><h3>STYLE</h3><div class="row"><label>Main<input type="color" value="#66578a" oninput="css('--main',this.value)"></label><label>Accent<input type="color" value="#9c88c4" oninput="css('--accent',this.value)"></label></div><div class="row"><label>Background<input type="color" value="#f4f2f7" oninput="css('--bg',this.value)"></label><label>Paper<input type="color" value="#ffffff" oninput="css('--paper',this.value)"></label></div><div class="row"><label>Text<input type="color" value="#24202b" oninput="css('--ink',this.value)"></label><label>Sub color<input type="color" value="#dcd4ea" oninput="css('--sub',this.value)"></label></div><div class="row"><label>Card<input id="cardColor" type="color" value="#ffffff" oninput="setCardColor(this.value)"></label><label>Card Text<input id="cardTextColor" type="color" value="#24202b" oninput="setCardText(this.value)"></label></div><div class="toggle"><span>Card Text AUTO</span><input id="cardTextAuto" type="checkbox" checked onchange="toggleCardTextAuto(this.checked)"></div><label>본문 폰트<select onchange="css('--body',this.value)"><option value="'Hahmlet',serif">Hahmlet · 명조</option><option value="'Noto Serif KR',serif">Noto Serif KR · 명조</option><option value="'Nanum Myeongjo',serif">Nanum Myeongjo · 명조</option><option value="'Gowun Batang',serif">Gowun Batang · 명조</option><option value="'Song Myung',serif">Song Myung · 명조</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR · 고딕</option><option value="'MabinogiClassicR',sans-serif">마비옛체 · 게임/픽셀</option><option value="'Nanum Gothic',sans-serif">Nanum Gothic · 고딕</option><option value="'Gowun Dodum',sans-serif">Gowun Dodum · 고딕</option><option value="'Orbit',sans-serif">Orbit · 고딕</option><option value="'Gaegu',cursive">Gaegu · 손글씨</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script · 손글씨</option><option value="'Jua',sans-serif">Jua · 디스플레이</option><option value="'Do Hyeon',sans-serif">Do Hyeon · 디스플레이</option><option value="'Black Han Sans',sans-serif">Black Han Sans · 굵은 제목</option></select></label><label style="margin-top:8px">포인트 폰트<select onchange="css('--display',this.value)"><option value="'Montserrat',sans-serif">Montserrat</option><option value="'Press Start 2P',monospace">Press Start 2P · 8bit</option><option value="'MabinogiClassicR',sans-serif">마비옛체</option><option value="'Jua',sans-serif">Jua</option><option value="'Do Hyeon',sans-serif">Do Hyeon</option><option value="'Black Han Sans',sans-serif">Black Han Sans</option><option value="'Gaegu',cursive">Gaegu</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script</option><option value="'Noto Serif KR',serif">Noto Serif KR</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR</option></select></label></div>
@@ -247,7 +426,55 @@
 const chars=document.getElementById('characters'), controls=document.getElementById('charControls'); let charCount=2; const imgState={};
 function css(k,v){document.documentElement.style.setProperty(k,v)}
 const paper=document.getElementById('capture');
-function setDecorClass(prefix,value){[...paper.classList].filter(c=>c.startsWith(prefix)).forEach(c=>paper.classList.remove(c));if(value&&value!=='none'&&value!=='normal'&&value!=='solid'&&value!=='pill')paper.classList.add(prefix+value)}
+
+
+
+function syncEdgeAccentFromUI(){
+  const ctl=[...document.querySelectorAll('select')].find(
+    el=>(el.getAttribute('onchange')||'').includes("setDecorClass('edge-accent-'")
+  );
+  if(!ctl)return;
+  const v=(ctl.value||'none').toLowerCase();
+
+  [...paper.classList].filter(c=>c.startsWith('edge-accent-')).forEach(c=>paper.classList.remove(c));
+  paper.querySelectorAll(':scope > .edge-accent-layer,:scope > .live-edge-bar').forEach(el=>el.remove());
+  if(v==='none')return;
+
+  const layer=document.createElement('div');
+  layer.className='edge-accent-layer';
+  layer.setAttribute('aria-hidden','true');
+  const add=cls=>{
+    const bar=document.createElement('i');
+    bar.className=cls;
+    layer.appendChild(bar);
+  };
+  if(v==='top') add('ea-top');
+  else if(v==='both'){add('ea-top');add('ea-bottom');}
+  else if(v==='left') add('ea-left');
+  paper.appendChild(layer);
+}
+
+
+function normalizeHorizontalEdge(){
+  const horizontal = paper.classList.contains('edge-accent-top') ||
+                     paper.classList.contains('edge-accent-both') ||
+                     paper.classList.contains('edge-top') ||
+                     paper.classList.contains('edge-both');
+  if(horizontal){
+    [...paper.classList].filter(c=>c.startsWith('paper-border-')).forEach(c=>paper.classList.remove(c));
+    const pb=[...document.querySelectorAll('select')].find(x=>(x.getAttribute('onchange')||'').includes("setDecorClass('paper-border-'"));
+    if(pb) pb.value='none';
+  }
+}
+function setDecorClass(prefix,value){
+  if(prefix==='edge-accent-'){
+    [...paper.classList].filter(c=>c.startsWith(prefix)).forEach(c=>paper.classList.remove(c));
+    syncEdgeAccentFromUI();
+    return;
+  }
+  [...paper.classList].filter(c=>c.startsWith(prefix)).forEach(c=>paper.classList.remove(c));
+  if(value&&value!=='none'&&value!=='normal'&&value!=='solid'&&value!=='pill') paper.classList.add(prefix+value);
+}
 function setPattern(v){['pattern-none','pattern-dot','pattern-grid','pattern-stars','pattern-cross','pattern-diamond','pattern-constellation'].forEach(c=>paper.classList.remove(c));paper.classList.add('pattern-'+v)}
 function hexRgb(hex){hex=hex.replace('#','');if(hex.length===3)hex=[...hex].map(x=>x+x).join('');return [parseInt(hex.slice(0,2),16),parseInt(hex.slice(2,4),16),parseInt(hex.slice(4,6),16)]}
 function refreshPatternRGBA(){let st=getComputedStyle(document.documentElement),hex=st.getPropertyValue('--pattern').trim()||'#8aa8d8',op=parseFloat(st.getPropertyValue('--pattern-opacity'))||0,[r,g,b]=hexRgb(hex);document.documentElement.style.setProperty('--pattern-rgba',`rgba(${r},${g},${b},${op})`);document.documentElement.style.setProperty('--pattern-rgba-soft',`rgba(${r},${g},${b},${op*.55})`)}
@@ -393,146 +620,299 @@ charMutationObserver.observe(document.getElementById('characters'),{childList:tr
 let eventN=0;function removeStoryItem(btn){btn.closest('.event,.scene')?.remove()}function addEvent(){eventN++;document.getElementById('timeline').insertAdjacentHTML('beforeend',`<div class="event"><button class="delete-item" data-export-ui="true" title="Delete timeline event" aria-label="Delete timeline event" onclick="removeStoryItem(this)">×</button><div class="event-time editable" contenteditable>TIME / CHAPTER</div><div class="event-title editable" contenteditable>Event title</div><div class="event-desc editable" contenteditable>이 시기에 일어난 사건과 관계의 변화를 적어주세요.</div></div>`)}
 let sceneN=0;function addScene(withImage=true){sceneN++;let rv=document.getElementById('sceneRatio')?.value||'3-1',ratio={'3-1':'3/1','16-9':'16/9','3-2':'3/2','4-3':'4/3','1-1':'1/1'}[rv]||'3/1';let imagePart=withImage?`<div class="imgbox" id="sceneImg${sceneN}" style="--scene-ratio:${ratio}" onclick="sceneUpload(${sceneN})">CLICK TO ADD IMAGE<input hidden type="file" accept="image/*" id="sceneFile${sceneN}" onchange="loadImage(this,'sceneImg${sceneN}')"></div><div class="scene-image-tools" data-export-ui="true"><label>Scale<input type="range" min="50" max="250" value="100" oninput="imgScale('sceneImg${sceneN}',this.value)"></label><label>X<input type="range" min="-100" max="100" value="0" oninput="imgPos('sceneImg${sceneN}','x',this.value)"></label><label>Y<input type="range" min="-100" max="100" value="0" oninput="imgPos('sceneImg${sceneN}','y',this.value)"></label></div>`:'';document.getElementById('scenes').insertAdjacentHTML('beforeend',`<article class="scene ${withImage?'scene-with-image':'scene-text-only'}"><button class="delete-item" data-export-ui="true" title="Delete scene" aria-label="Delete scene" onclick="removeStoryItem(this)">×</button>${imagePart}<div class="scene-body"><div class="scene-title editable" contenteditable>Scene ${String(sceneN).padStart(2,'0')}</div><div class="scene-meta editable" contenteditable>CHARACTER 01 · CHARACTER 02</div><div class="scene-desc editable" contenteditable>장면의 내용, 대사, 의미 등을 자유롭게 적어주세요.</div></div></article>`)}function sceneUpload(n){let f=document.getElementById('sceneFile'+n);if(f)f.click()}
 let selectedSticker=null,stickerZ=20;function addSticker(input){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{let im=document.createElement('img');im.src=e.target.result;im.className='sticker';im.style.left='80px';im.style.top='80px';im.style.width='140px';im.dataset.rotate='0';im.dataset.flip='1';im.style.zIndex=++stickerZ;document.getElementById('capture').appendChild(im);drag(im);selectSticker(im)};r.readAsDataURL(f);input.value=''}function stickerTransform(el){el.style.transform=`rotate(${+(el.dataset.rotate||0)}deg) scaleX(${+(el.dataset.flip||1)})`}function selectSticker(el){document.querySelectorAll('.sticker.selected').forEach(x=>x.classList.remove('selected'));selectedSticker=el;if(!el){document.getElementById('stickerEditor').style.display='none';return}el.classList.add('selected');document.getElementById('stickerEditor').style.display='block';document.getElementById('stickerSize').value=parseFloat(el.style.width)||140;document.getElementById('stickerRotate').value=+(el.dataset.rotate||0)}function editSticker(type,v){if(!selectedSticker)return;if(type==='size')selectedSticker.style.width=v+'px';if(type==='rotate'){selectedSticker.dataset.rotate=v;stickerTransform(selectedSticker)}}function flipSticker(){if(!selectedSticker)return;selectedSticker.dataset.flip=-(+(selectedSticker.dataset.flip||1));stickerTransform(selectedSticker)}function layerSticker(dir){if(!selectedSticker)return;if(dir>0)selectedSticker.style.zIndex=++stickerZ;else selectedSticker.style.zIndex=Math.max(1,(+selectedSticker.style.zIndex||1)-1)}function deleteSticker(){if(!selectedSticker)return;let x=selectedSticker;selectSticker(null);x.remove()}function drag(el){let sx,sy,l,t;el.onpointerdown=e=>{e.preventDefault();e.stopPropagation();selectSticker(el);sx=e.clientX;sy=e.clientY;l=el.offsetLeft;t=el.offsetTop;el.setPointerCapture(e.pointerId);el.onpointermove=m=>{el.style.left=l+m.clientX-sx+'px';el.style.top=t+m.clientY-sy+'px'};el.onpointerup=()=>el.onpointermove=null}}document.getElementById('capture').addEventListener('pointerdown',e=>{if(!e.target.classList.contains('sticker'))selectSticker(null)})
-async function savePNG(){
- const btn=event?.currentTarget, oldText=btn?.textContent;
- const source=document.getElementById('capture');
- let stage=null;
- try{
-  if(btn){btn.disabled=true;btn.textContent='RENDERING…'}
-  if(!window.html2canvas) throw new Error('PNG 라이브러리를 불러오지 못했습니다. 인터넷 연결 후 페이지를 다시 열어주세요.');
-  if(document.fonts?.ready) await document.fonts.ready;
-
-  syncFullBodies();
-  syncCharacterRows();
-  await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
-  await Promise.all([...source.querySelectorAll('img')].map(im=>im.complete?Promise.resolve():new Promise(res=>{im.onload=im.onerror=res})));
-
-  /* v16.4.0
-     PNG는 현재 편집 화면을 "다시 레이아웃"하지 않는다.
-     현재 paper의 실제 폭/각 이미지의 실제 픽셀 위치를 먼저 읽고,
-     같은 폭의 독립된 export stage에 clone을 만든 뒤 그 상태만 캡처한다. */
-  const sr=source.getBoundingClientRect();
-  const exportWidth=Math.round(sr.width);
-
-  stage=document.createElement('div');
-  stage.id='pngExportStage';
-  Object.assign(stage.style,{
-    position:'fixed', left:'0', top:'0',
-    width:exportWidth+'px',
-    zIndex:'-2147483647',
-    pointerEvents:'none',
-    background:'transparent'
-  });
-
-  const clone=source.cloneNode(true);
-  clone.id='capture-export-clone';
-  clone.classList.add('is-exporting');
-  clone.style.setProperty('width',exportWidth+'px','important');
-  clone.style.setProperty('min-width',exportWidth+'px','important');
-  clone.style.setProperty('max-width',exportWidth+'px','important');
-  clone.style.setProperty('margin','0','important');
-  clone.style.setProperty('box-sizing','border-box','important');
-  clone.style.setProperty('transform','none','important');
-
-  clone.querySelectorAll('[data-export-ui="true"]').forEach(el=>el.remove());
-  clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
-
-  stage.appendChild(clone);
-  document.body.appendChild(stage);
-
-  /* Copy the live preview's exact image rectangles.
-     This includes pair image, portraits, scenes and full-body images. */
-  const liveImgs=[...source.querySelectorAll('.imgbox img')];
-  const cloneImgs=[...clone.querySelectorAll('.imgbox img')];
-
-  liveImgs.forEach((im,i)=>{
-    const cim=cloneImgs[i];
-    if(!cim)return;
-    const box=im.parentElement;
-    const cbox=cim.parentElement;
-    const ir=im.getBoundingClientRect();
-    const br=box.getBoundingClientRect();
-
-    cbox.style.setProperty('position','relative','important');
-    cbox.style.setProperty('overflow','hidden','important');
-
-    cim.style.setProperty('position','absolute','important');
-    cim.style.setProperty('left',(ir.left-br.left)+'px','important');
-    cim.style.setProperty('top',(ir.top-br.top)+'px','important');
-    cim.style.setProperty('right','auto','important');
-    cim.style.setProperty('bottom','auto','important');
-    cim.style.setProperty('width',ir.width+'px','important');
-    cim.style.setProperty('height',ir.height+'px','important');
-    cim.style.setProperty('min-width','0','important');
-    cim.style.setProperty('min-height','0','important');
-    cim.style.setProperty('max-width','none','important');
-    cim.style.setProperty('max-height','none','important');
-    cim.style.setProperty('object-fit','fill','important');
-    cim.style.setProperty('transform','none','important');
-    cim.style.setProperty('transform-origin','0 0','important');
-  });
-
-  /* Stickers also use their live pixel geometry. */
-  const liveStickers=[...source.querySelectorAll('.sticker')];
-  const cloneStickers=[...clone.querySelectorAll('.sticker')];
-  liveStickers.forEach((im,i)=>{
-    const cim=cloneStickers[i]; if(!cim)return;
-    const ir=im.getBoundingClientRect(), cr=source.getBoundingClientRect();
-    cim.style.setProperty('left',(ir.left-cr.left)+'px','important');
-    cim.style.setProperty('top',(ir.top-cr.top)+'px','important');
-    cim.style.setProperty('width',ir.width+'px','important');
-  });
-
-  /* Character cards must keep the exact preview column width.
-     This prevents the export document from collapsing into the <=900px mobile layout. */
-  const liveChars=[...source.querySelectorAll('#characters > .char')];
-  const cloneChars=[...clone.querySelectorAll('#characters > .char')];
-  liveChars.forEach((el,i)=>{
-    const cel=cloneChars[i]; if(!cel)return;
-    cel.style.setProperty('min-width',el.getBoundingClientRect().width+'px','important');
-  });
-
-  await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
-
-  const exportHeight=Math.ceil(clone.scrollHeight);
-  stage.style.height=exportHeight+'px';
-
-  const desktopViewport=Math.max(
-    document.documentElement.clientWidth,
-    source.classList.contains('canvas-wide') ? 1800 : 1280
-  );
-
-  const canvas=await html2canvas(clone,{
-    scale:2,
-    useCORS:true,
-    allowTaint:false,
-    backgroundColor:getComputedStyle(source).backgroundColor||'#ffffff',
-    logging:false,
-    imageTimeout:15000,
-    width:exportWidth,
-    height:exportHeight,
-    windowWidth:desktopViewport,
-    windowHeight:Math.max(document.documentElement.clientHeight,900),
-    scrollX:0,
-    scrollY:0,
-    x:0,
-    y:0
-  });
-
-  const blob=await new Promise(res=>canvas.toBlob(res,'image/png'));
-  if(!blob) throw new Error('PNG 파일 생성에 실패했습니다.');
-  const url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.download='pair-orbit.png'; a.href=url;
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),1500);
- }catch(err){
-  console.error(err);
-  alert('PNG 저장 중 오류가 발생했습니다.\n'+(err?.message||err));
- }finally{
-  stage?.remove();
-  if(btn){btn.disabled=false;btn.textContent=oldText||'SAVE AS PNG'}
+function exportPatternTileDataURL(el){
+ const cs=getComputedStyle(el), size=Math.max(12,parseFloat(cs.getPropertyValue('--pattern-size'))||24);
+ const hex=(cs.getPropertyValue('--pattern').trim()||'#8aa8d8');
+ const op=Math.max(0,Math.min(1,parseFloat(cs.getPropertyValue('--pattern-opacity'))||0));
+ const rgb=hexRgb(hex), rgba=(a)=>`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${a})`;
+ let w=size,h=size,kind='none';
+ for(const k of ['dot','grid','stars','cross','diamond','constellation']) if(el.classList.contains('pattern-'+k)) kind=k;
+ if(kind==='none') return null;
+ if(kind==='constellation'){w=h=size*4}else if(kind==='stars'){w=h=size*15}
+ const c=document.createElement('canvas'); c.width=Math.max(1,Math.round(w*2)); c.height=Math.max(1,Math.round(h*2));
+ const x=c.getContext('2d'); x.scale(2,2); x.clearRect(0,0,w,h);
+ x.strokeStyle=rgba(op*.55); x.fillStyle=rgba(op); x.lineWidth=1;
+ const line=(x1,y1,x2,y2)=>{x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke()};
+ const dot=(cx,cy,r,a=op)=>{x.fillStyle=rgba(a);x.beginPath();x.arc(cx,cy,r,0,Math.PI*2);x.fill()};
+ if(kind==='dot'){dot(0,0,1)}
+ if(kind==='grid'){line(0,0,w,0);line(0,0,0,h)}
+ if(kind==='cross'){line(0,0,w,h);line(w,0,0,h)}
+ if(kind==='diamond'){line(0,h/2,w/2,0);line(w/2,0,w,h/2);line(w,h/2,w/2,h);line(w/2,h,0,h/2)}
+ if(kind==='constellation'){
+   /* mirrors the live CSS: two stars + the 28deg diagonal detail */
+   dot(w*.20,h*.30,1.5); dot(w*.70,h*.60,1);
+   x.strokeStyle=rgba(op*.55); x.lineWidth=1;
+   const ang=28*Math.PI/180, step=h*.52;
+   for(let yy=-h;yy<h*2;yy+=step){line(-w,yy,w*2,yy+Math.tan(ang)*w*3)}
  }
+ if(kind==='stars'){
+   dot(w*.15,h*.20,1.2);dot(w*.78,h*.35,1);dot(w*.42,h*.75,1.4,op*.55);
+ }
+ return {url:`url("${c.toDataURL('image/png')}")`, size:`${w}px ${h}px`};
 }
+
+
+function sanitizeRichTextHosts(root=document.getElementById('capture')){
+ const hosts=root.querySelectorAll('.hero .desc,.detail-text,.note .editable,.event-desc,.scene-desc,.credits');
+ hosts.forEach(host=>{
+   // Old versions could leave layout styles on inline formatting nodes. Strip layout only;
+   // keep semantic formatting such as font-weight/font-style/text-decoration/background/color/font-size.
+   host.querySelectorAll('span,font,b,strong,i,em,s,strike,mark').forEach(el=>{
+     const st=el.style;
+     ['display','position','float','width','min-width','max-width','margin','margin-left','margin-right',
+      'padding-left','padding-right','left','right','top','bottom','white-space','word-spacing',
+      'text-align','text-align-last'].forEach(p=>st.removeProperty(p));
+     el.removeAttribute('align');
+   });
+   // Normalize non-breaking spaces introduced by old browser editing without touching real characters.
+   const walker=document.createTreeWalker(host,NodeFilter.SHOW_TEXT);
+   let n; while(n=walker.nextNode()) if(n.nodeValue.includes('\u00a0')) n.nodeValue=n.nodeValue.replace(/\u00a0/g,' ');
+ });
+}
+
+function freezeRichTextForExport(liveRoot, cloneRoot){
+  const selector='.hero .desc,.detail-text,.note .editable,.event-desc,.scene-desc,.credits';
+  const liveHosts=[...liveRoot.querySelectorAll(selector)];
+  const cloneHosts=[...cloneRoot.querySelectorAll(selector)];
+
+  liveHosts.forEach((liveHost,i)=>{
+    const cloneHost=cloneHosts[i]; if(!cloneHost)return;
+    const hostRect=liveHost.getBoundingClientRect();
+    if(!hostRect.width || !hostRect.height)return;
+
+    // Keep the exact live box. The clone will contain pre-positioned glyphs,
+    // so html2canvas never gets to re-wrap/re-justify Korean rich text.
+    cloneHost.innerHTML='';
+    cloneHost.style.setProperty('position','relative','important');
+    cloneHost.style.setProperty('display','block','important');
+    cloneHost.style.setProperty('height',hostRect.height+'px','important');
+    cloneHost.style.setProperty('min-height',hostRect.height+'px','important');
+    cloneHost.style.setProperty('width',hostRect.width+'px','important');
+    cloneHost.style.setProperty('text-align','left','important');
+    cloneHost.style.setProperty('white-space','normal','important');
+    cloneHost.style.setProperty('overflow','visible','important');
+
+    const walker=document.createTreeWalker(liveHost,NodeFilter.SHOW_TEXT,{
+      acceptNode:n=>n.nodeValue ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
+    });
+    const textNodes=[]; let n;
+    while(n=walker.nextNode()) textNodes.push(n);
+
+    textNodes.forEach(node=>{
+      const parent=node.parentElement || liveHost;
+      const cs=getComputedStyle(parent);
+      const text=node.nodeValue;
+      let offset=0;
+
+      // Iterate by Unicode code point so Korean syllables are never split into UTF-16 halves.
+      for(const ch of text){
+        const len=ch.length;
+        if(ch==='\n' || ch==='\r'){ offset+=len; continue; }
+
+        const range=document.createRange();
+        try{
+          range.setStart(node,offset);
+          range.setEnd(node,offset+len);
+        }catch(e){ offset+=len; continue; }
+
+        const rects=[...range.getClientRects()];
+        rects.forEach(r=>{
+          if(r.width<=0 && ch.trim()!=='')return;
+          const sp=cloneHost.ownerDocument.createElement('span');
+          sp.textContent=ch;
+          sp.style.setProperty('position','absolute','important');
+          sp.style.setProperty('left',(r.left-hostRect.left)+'px','important');
+          sp.style.setProperty('top',(r.top-hostRect.top)+'px','important');
+          sp.style.setProperty('width',Math.max(0,r.width)+'px','important');
+          sp.style.setProperty('height',Math.max(0,r.height)+'px','important');
+          sp.style.setProperty('display','block','important');
+          sp.style.setProperty('margin','0','important');
+          sp.style.setProperty('padding','0','important');
+          sp.style.setProperty('white-space','pre','important');
+          sp.style.setProperty('font-family',cs.fontFamily,'important');
+          sp.style.setProperty('font-size',cs.fontSize,'important');
+          sp.style.setProperty('font-weight',cs.fontWeight,'important');
+          sp.style.setProperty('font-style',cs.fontStyle,'important');
+          sp.style.setProperty('line-height',cs.lineHeight,'important');
+          sp.style.setProperty('letter-spacing',cs.letterSpacing,'important');
+          sp.style.setProperty('color',cs.color,'important');
+          sp.style.setProperty('text-decoration-line',cs.textDecorationLine,'important');
+          sp.style.setProperty('text-decoration-style',cs.textDecorationStyle,'important');
+          sp.style.setProperty('text-decoration-color',cs.textDecorationColor,'important');
+          sp.style.setProperty('box-sizing','border-box','important');
+
+          const bg=cs.backgroundColor;
+          if(bg && bg!=='rgba(0, 0, 0, 0)' && bg!=='transparent'){
+            sp.style.setProperty('background-color',bg,'important');
+          }
+          cloneHost.appendChild(sp);
+        });
+        offset+=len;
+      }
+    });
+  });
+}
+
+
+
+
+function freezeFullBodiesForExport(liveRoot, cloneRoot){
+  const liveBoxes=[...liveRoot.querySelectorAll('.fullbody')];
+  const cloneBoxes=[...cloneRoot.querySelectorAll('.fullbody')];
+  liveBoxes.forEach((liveBox,i)=>{
+    const cloneBox=cloneBoxes[i];
+    const liveImg=liveBox.querySelector('img');
+    const cloneImg=cloneBox?.querySelector('img');
+    if(!cloneBox || !liveImg || !cloneImg)return;
+
+    const br=liveBox.getBoundingClientRect();
+    const ir=liveImg.getBoundingClientRect();
+
+    // Use the editor's already-resolved pixel geometry.
+    // No CSS variable, flex/grid, translateX or natural-image recalculation in export.
+    cloneBox.style.setProperty('position','relative','important');
+    cloneBox.style.setProperty('height',br.height+'px','important');
+    cloneBox.style.setProperty('overflow','visible','important');
+
+    cloneImg.style.setProperty('position','absolute','important');
+    cloneImg.style.setProperty('left',(ir.left-br.left)+'px','important');
+    cloneImg.style.setProperty('top',(ir.top-br.top)+'px','important');
+    cloneImg.style.setProperty('bottom','auto','important');
+    cloneImg.style.setProperty('width',ir.width+'px','important');
+    cloneImg.style.setProperty('height',ir.height+'px','important');
+    cloneImg.style.setProperty('max-width','none','important');
+    cloneImg.style.setProperty('max-height','none','important');
+    cloneImg.style.setProperty('transform','none','important');
+    cloneImg.style.setProperty('transform-origin','0 0','important');
+    cloneImg.style.setProperty('object-fit','fill','important');
+  });
+}
+
+async function savePNG(){
+  if(!window.html2canvas){ alert('PNG renderer is not ready.'); return; }
+
+  const exportWidth = paper.offsetWidth;
+  const exportHeight = paper.scrollHeight;
+  const scale = 2;
+
+  // Snapshot current editor values into the DOM clone.
+  const clone = paper.cloneNode(true);
+  const liveFields = paper.querySelectorAll('input,textarea,select');
+  const cloneFields = clone.querySelectorAll('input,textarea,select');
+  liveFields.forEach((el,i)=>{
+    const c=cloneFields[i]; if(!c)return;
+    if(el.tagName==='SELECT') c.value=el.value;
+    else if(el.type==='checkbox'||el.type==='radio') c.checked=el.checked;
+    else c.value=el.value;
+  });
+
+  // Controls/handles are editor UI only.
+  clone.querySelectorAll('[data-export-ui="true"], .resize-handle, .move-handle').forEach(el=>el.remove());
+
+  // Make an isolated browser document at EXACTLY the editor paper width.
+  const frame=document.createElement('iframe');
+  frame.setAttribute('aria-hidden','true');
+  Object.assign(frame.style,{
+    position:'fixed', left:'-100000px', top:'0',
+    width:exportWidth+'px', height:exportHeight+'px',
+    border:'0', opacity:'0', pointerEvents:'none'
+  });
+  document.body.appendChild(frame);
+
+  try{
+    const doc=frame.contentDocument;
+    doc.open();
+    doc.write('<!doctype html><html><head></head><body></body></html>');
+    doc.close();
+
+    // v16.5.20 — copy the LIVE editor state, not just stylesheet defaults.
+    // Most controls write CSS variables directly to documentElement.style.
+    // Missing these was the reason full-body X/scale and typography reverted in PNG.
+    doc.documentElement.style.cssText = document.documentElement.style.cssText;
+    doc.documentElement.className = document.documentElement.className;
+    doc.body.className = document.body.className;
+    doc.body.style.cssText = document.body.style.cssText;
+
+    // Copy all stylesheets/style blocks so the browser computes exactly the same CSS.
+    document.querySelectorAll('style,link[rel="stylesheet"]').forEach(node=>{
+      doc.head.appendChild(node.cloneNode(true));
+    });
+
+    const base=doc.createElement('base');
+    base.href=document.baseURI;
+    doc.head.prepend(base);
+
+    // Freeze every current custom property from the live root into the isolated root.
+    const liveRootCS=getComputedStyle(document.documentElement);
+    for(let i=0;i<liveRootCS.length;i++){
+      const name=liveRootCS[i];
+      if(name.startsWith('--')){
+        doc.documentElement.style.setProperty(name,liveRootCS.getPropertyValue(name));
+      }
+    }
+
+    const reset=doc.createElement('style');
+    reset.textContent=`
+      html,body{margin:0!important;padding:0!important;width:${exportWidth}px!important;
+        min-width:${exportWidth}px!important;max-width:${exportWidth}px!important;
+        overflow:visible!important;background:transparent!important;}
+      .paper{margin:0!important;transform:none!important;width:${exportWidth}px!important;
+        min-width:${exportWidth}px!important;max-width:${exportWidth}px!important;
+        box-sizing:border-box!important;}
+    `;
+    doc.head.appendChild(reset);
+    doc.body.appendChild(doc.importNode(clone,true));
+    const target=doc.querySelector('.paper');
+
+    // Preserve the live paper's own inline state as the final authority.
+    target.style.cssText = paper.style.cssText + ';' + target.style.cssText;
+
+    // Wait for the SAME fonts and images inside the isolated document.
+    if(doc.fonts && doc.fonts.ready) await doc.fonts.ready;
+    const imgs=[...target.querySelectorAll('img')];
+    await Promise.all(imgs.map(img=>{
+      if(img.complete) return Promise.resolve();
+      return new Promise(res=>{img.onload=img.onerror=res;});
+    }));
+    await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+
+    // v16.5.20: stop asking html2canvas to reinterpret the two unstable areas.
+    // Text is rebuilt at the exact glyph rectangles visible in the editor.
+    // Full-body images are pinned to the exact editor pixel rectangles.
+    freezeRichTextForExport(paper,target);
+    freezeFullBodiesForExport(paper,target);
+    await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+
+    const h=Math.ceil(target.scrollHeight);
+    frame.style.height=h+'px';
+
+    const canvas=await html2canvas(target,{
+      backgroundColor:null,
+      scale,
+      useCORS:true,
+      allowTaint:true,
+      logging:false,
+      foreignObjectRendering:false,
+      width:exportWidth,
+      height:h,
+      windowWidth:exportWidth,
+      windowHeight:h,
+      scrollX:0,
+      scrollY:0
+    });
+
+    const a=document.createElement('a');
+    a.download='pair-orbit.png';
+    a.href=canvas.toDataURL('image/png');
+    a.click();
+  }catch(err){
+    console.error(err);
+    alert('PNG 저장 중 오류가 발생했습니다: '+(err&&err.message?err.message:err));
+  }finally{
+    frame.remove();
+  }
+}
+
 
 const DATA_SCHEMA_VERSION=3;
 
@@ -604,10 +984,11 @@ function collectRootVars(){
 function saveJSON(){
   try{
     normalizeDetailEditors();
+    sanitizeRichTextHosts(document.getElementById('capture'));
     const payload={
       format:'pair-orbit-maker',
       schemaVersion:DATA_SCHEMA_VERSION,
-      appVersion:'16.4.0',
+      appVersion:'16.5.20',
       savedAt:new Date().toISOString(),
       data:{
         paperHTML:document.getElementById('capture').innerHTML,
@@ -642,9 +1023,9 @@ function loadJSON(input){
       if(d.paperHTML!=null)cap.innerHTML=d.paperHTML;
       if(d.paperClass)cap.className=d.paperClass;
       normalizeDetailEditors();
-      restoreEditableHTML(d.editableHTML);
+      restoreEditableHTML(d.editableHTML);syncEdgeAccentFromUI();
       Object.entries(d.rootVars||{}).forEach(([k,v])=>css(k,v));
-      restoreControls(d.controls);
+      restoreControls(d.controls);normalizeHorizontalEdge();
       Object.keys(imgState).forEach(k=>delete imgState[k]);Object.assign(imgState,d.imgState||{});Object.keys(imgState).forEach(id=>updateImg(id));
       charCount=d.charCount||document.querySelectorAll('.char').length||1;
       layoutMode=d.layoutMode||'compact';currentLang=d.currentLang||'en';
@@ -670,139 +1051,78 @@ refreshOrbit();scheduleCharacterRowSync();</script><script>
   if(!toolbar) return;
   let active=null, savedRange=null;
 
-  // Only prose-like fields get the formatting toolbar.
   const proseSelector=[
-    '.hero .desc',
-    '.detail p,.detail-text',
-    '.note .editable',
-    '.event-desc',
-    '.scene-desc',
-    '.credits'
+    '.hero .desc','.detail p','.detail-text','.note .editable',
+    '.event-desc','.scene-desc','.credits'
   ].join(',');
 
   function proseFromNode(node){
-    let el=node && (node.nodeType===1 ? node : node.parentElement);
+    const el=node && (node.nodeType===1 ? node : node.parentElement);
     if(!el) return null;
     const prose=el.closest(proseSelector);
-    if(!prose || !prose.closest('.paper') || prose.closest('.editor,.rich-toolbar')) return null;
-    return prose;
+    return prose && prose.closest('.paper') ? prose : null;
   }
-
-  function hideToolbar(){
-    toolbar.classList.remove('show');
-  }
-
-  function captureSelection(){
-    const sel=window.getSelection();
-    if(!sel || !sel.rangeCount || sel.isCollapsed){ hideToolbar(); return; }
-
-    const range=sel.getRangeAt(0);
+  function hide(){ toolbar.classList.remove('show'); }
+  function remember(){
+    const sel=getSelection();
+    if(!sel || !sel.rangeCount || sel.isCollapsed){ hide(); return; }
     const a=proseFromNode(sel.anchorNode), f=proseFromNode(sel.focusNode);
-    if(!a || !f || a!==f){ hideToolbar(); return; }
-
-    active=a;
-    savedRange=range.cloneRange();
-
-    // Make it measurable before calculating its final position.
+    if(!a || a!==f){ hide(); return; }
+    active=a; savedRange=sel.getRangeAt(0).cloneRange();
     toolbar.classList.add('show');
-    const rect=range.getBoundingClientRect();
-    const tw=toolbar.offsetWidth || 130;
-    const th=toolbar.offsetHeight || 36;
-    const left=Math.max(8,Math.min(window.innerWidth-tw-8,rect.left+rect.width/2-tw/2));
-    let top=rect.top-th-8;
-    if(top<8) top=Math.min(window.innerHeight-th-8,rect.bottom+8);
-    toolbar.style.left=left+'px';
-    toolbar.style.top=top+'px';
+    const rect=sel.getRangeAt(0).getBoundingClientRect(), tw=toolbar.offsetWidth||250, th=toolbar.offsetHeight||36;
+    toolbar.style.left=Math.max(8,Math.min(innerWidth-tw-8,rect.left+rect.width/2-tw/2))+'px';
+    toolbar.style.top=Math.max(8,rect.top-th-8)+'px';
+  }
+  function restore(){
+    if(!active || !savedRange || !document.contains(active)) return false;
+    active.focus({preventScroll:true});
+    const sel=getSelection(); sel.removeAllRanges(); sel.addRange(savedRange);
+    return true;
+  }
+  function afterEdit(){
+    const sel=getSelection();
+    if(sel && sel.rangeCount) savedRange=sel.getRangeAt(0).cloneRange();
+    active?.dispatchEvent(new Event('input',{bubbles:true}));
+    requestAnimationFrame(remember);
   }
 
+  document.addEventListener('selectionchange',()=>requestAnimationFrame(remember));
+  document.addEventListener('mouseup',()=>setTimeout(remember,0));
+  document.addEventListener('keyup',()=>setTimeout(remember,0));
+  document.addEventListener('mousedown',e=>{ if(!toolbar.contains(e.target) && !proseFromNode(e.target)) hide(); });
 
-  document.addEventListener('keydown',e=>{
-    const prose=proseFromNode(e.target);
-    if(!prose || e.key!=='Enter') return;
-    e.preventDefault();
-    const sel=window.getSelection();
-    if(!sel.rangeCount) return;
-    const range=sel.getRangeAt(0);
-    range.deleteContents();
-    const br=document.createElement('br');
-    range.insertNode(br);
-    range.setStartAfter(br); range.collapse(true);
-    sel.removeAllRanges(); sel.addRange(range);
-    prose.dispatchEvent(new Event('input',{bubbles:true}));
-  });
+  /* Do NOT rewrite Enter, BR, DIV or P nodes.
+     Browser-native contenteditable paragraph structure is preserved exactly.
+     This prevents text-node loss and stale Range/highlight corruption. */
 
-  // selectionchange is more reliable for contenteditable than mouseup alone.
-
-  function normalizeRichBlocks(root){
-    if(!root) return;
-    [...root.querySelectorAll(':scope > div,:scope > p')].forEach(block=>{
-      const frag=document.createDocumentFragment();
-      while(block.firstChild) frag.appendChild(block.firstChild);
-      if(block.previousSibling) root.insertBefore(document.createElement('br'),block);
-      root.insertBefore(frag,block);
-      block.remove();
-    });
-  }
-  document.addEventListener('input',e=>{
-    const prose=proseFromNode(e.target);
-    if(prose) normalizeRichBlocks(prose);
-  });
-
-  document.addEventListener('selectionchange',()=>{
-    if(toolbar.matches(':hover')) return;
-    requestAnimationFrame(captureSelection);
-  });
-  document.addEventListener('mouseup',()=>setTimeout(captureSelection,0));
-  document.addEventListener('keyup',()=>setTimeout(captureSelection,0));
-  window.addEventListener('scroll',()=>{ if(toolbar.classList.contains('show')) captureSelection(); },true);
-
-  document.addEventListener('mousedown',e=>{
-    if(toolbar.contains(e.target)) return;
-    if(!proseFromNode(e.target)) hideToolbar();
-  });
-
-  // Keep the selected text alive while clicking toolbar buttons.
   toolbar.addEventListener('mousedown',e=>e.preventDefault());
   toolbar.addEventListener('click',e=>{
     const b=e.target.closest('button');
-    if(!b || !savedRange || !active) return;
-
-    const sel=window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(savedRange);
-    active.focus();
+    if(!b || !restore()) return;
 
     if(b.dataset.size){
-      const range=sel.getRangeAt(0);
-      if(!range.collapsed){
-        const span=document.createElement('span'); span.className='rt-size-'+b.dataset.size;
-        try{range.surroundContents(span)}catch(_){const frag=range.extractContents();span.appendChild(frag);range.insertNode(span)}
-        sel.removeAllRanges();const nr=document.createRange();nr.selectNodeContents(span);sel.addRange(nr);
-      }
+      const map={s:'2',m:'3',l:'4',xl:'5'};
+      document.execCommand('fontSize',false,map[b.dataset.size]||'3');
+    }else if(b.dataset.cmd==='bold'){
+      document.execCommand('bold',false,null);
+    }else if(b.dataset.cmd==='italic'){
+      document.execCommand('italic',false,null);
+    }else if(b.dataset.cmd==='strikeThrough'){
+      document.execCommand('strikeThrough',false,null);
     }else if(b.dataset.cmd==='hiliteColor'){
       const char=active.closest('.char');
-      const accent=(char ? getComputedStyle(char).getPropertyValue('--c-accent') : '')?.trim()
+      const accent=(char?getComputedStyle(char).getPropertyValue('--char-accent'):'').trim()
         || getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()
         || '#d9c8ef';
-      const range=sel.getRangeAt(0);
-      if(!range.collapsed){
-        const span=document.createElement('span');
-        span.className='rt-highlight';
-        span.style.backgroundColor=accent;
-        try{range.surroundContents(span)}catch(_){const frag=range.extractContents();span.appendChild(frag);range.insertNode(span)}
-        sel.removeAllRanges();const nr=document.createRange();nr.selectNodeContents(span);sel.addRange(nr);
-      }
-    }else{
-      const cls=b.dataset.cmd==='bold'?'rt-bold':b.dataset.cmd==='italic'?'rt-italic':b.dataset.cmd==='strikeThrough'?'rt-strike':'';
-      const range=sel.getRangeAt(0);
-      if(cls && !range.collapsed){
-        const span=document.createElement('span'); span.className=cls;
-        try{range.surroundContents(span)}catch(_){const frag=range.extractContents();span.appendChild(frag);range.insertNode(span)}
-        sel.removeAllRanges();const nr=document.createRange();nr.selectNodeContents(span);sel.addRange(nr);
-      }
+      document.execCommand('styleWithCSS',false,true);
+      document.execCommand('backColor',false,accent);
     }
-    if(sel.rangeCount) savedRange=sel.getRangeAt(0).cloneRange();
-    captureSelection();
+    afterEdit();
   });
 })();
+setTimeout(syncEdgeAccentFromUI,0);
+
+/* v16.5.20 initialize decoration layers after controls/data restoration. */
+requestAnimationFrame(()=>syncEdgeAccentFromUI());
 </script></body></html>
