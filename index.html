@@ -287,18 +287,7 @@
 </style>
 
 
-<style id="v1656ExactPattern">
-:root{
- --orbit-pattern-tile:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='72' viewBox='0 0 144 72'%3E%3Cpath d='M0 8L72 44' fill='none' stroke='%236c55d8' stroke-opacity='.105' stroke-width='1'/%3E%3Ccircle cx='96' cy='56' r='1.25' fill='%238f78ef' fill-opacity='.20'/%3E%3C/svg%3E");
-}
-.paper{
- background-color:var(--paper)!important;
- background-image:var(--orbit-pattern-tile)!important;
- background-repeat:repeat!important;
- background-size:144px 72px!important;
- background-position:0 0!important;
-}
-</style>
+<!-- v16.5.32: removed global !important background override; pattern classes now control paper background. -->
 
 
 <style id="v1657BrowserPaintExport">
@@ -1251,7 +1240,7 @@ setTimeout(syncEdgeAccentFromUI,0);
 /* v16.5.22 initialize decoration layers after controls/data restoration. */
 requestAnimationFrame(()=>syncEdgeAccentFromUI());
 
-/* v16.5.31: keep decoration UI and actual paper styles in sync. */
+/* v16.5.32: keep decoration UI and actual paper styles in sync. */
 (function(){
  const oldPattern=setPattern, oldPreset=applyPreset;
  const findSelect=(fragment)=>[...document.querySelectorAll('.panel select')].find(el=>(el.getAttribute('onchange')||'').includes(fragment));
