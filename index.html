@@ -1250,4 +1250,38 @@ setTimeout(syncEdgeAccentFromUI,0);
 
 /* v16.5.22 initialize decoration layers after controls/data restoration. */
 requestAnimationFrame(()=>syncEdgeAccentFromUI());
+
+/* v16.5.31: keep decoration UI and actual paper styles in sync. */
+(function(){
+ const oldPattern=setPattern, oldPreset=applyPreset;
+ const findSelect=(fragment)=>[...document.querySelectorAll('.panel select')].find(el=>(el.getAttribute('onchange')||'').includes(fragment));
+ const patternSelect=findSelect('setPattern(this.value)');
+ const orbitSelect=findSelect('setOrbit(this.value)');
+ const decorSelect=(prefix)=>findSelect("setDecorClass('"+prefix+"'");
+ const selectValue=(el,value)=>{if(el && [...el.options].some(o=>o.value===value))el.value=value;};
+ const patterns=['none','dot','grid','stars','cross','diamond','constellation'];
+ setPattern=function(value){
+   const v=patterns.includes(value)?value:'none';
+   oldPattern(v);
+   selectValue(patternSelect,v);
+   paper.dataset.activePattern=v;
+   if(typeof refreshPatternRGBA==='function')refreshPatternRGBA();
+ };
+ applyPreset=function(name){
+   const defs={minimal:['soft','none','solid','normal','none','off','simple','pill'],editorial:['square','none','solid','spacious','none','off','none','underline'],soft:['round','soft','solid','normal','dot','off','simple','pill'],classic:['square','soft','double','spacious','none','off','double','square'],retro:['square','none','dashed','compact','grid','off','simple','square'],orbit:['soft','soft','solid','normal','stars','minimal','simple','pill']};
+   const d=defs[name];if(!d)return;
+   oldPreset(name);
+   ['edge-','shadow-','line-','spacing-'].forEach((p,i)=>selectValue(decorSelect(p),d[i]));
+   setPattern(d[4]);selectValue(orbitSelect,d[5]);
+   selectValue(decorSelect('frame-'),d[6]);selectValue(decorSelect('kw-'),d[7]);
+   document.querySelectorAll('.decor-presets button').forEach(b=>b.classList.toggle('active',(b.getAttribute('onclick')||'').includes("'"+name+"'")));
+ };
+ // Avoid stale selector state after loading saved projects.
+ const originalLoad=typeof loadJSON==='function'?loadJSON:null;
+ if(originalLoad){loadJSON=function(...args){const result=originalLoad.apply(this,args);requestAnimationFrame(()=>{
+   const active=patterns.find(p=>paper.classList.contains('pattern-'+p))||'none';selectValue(patternSelect,active);
+   selectValue(orbitSelect,paper.classList.contains('orbit-decorative')?'decorative':paper.classList.contains('orbit-minimal')?'minimal':'off');
+ });return result;};}
+ const active=patterns.find(p=>paper.classList.contains('pattern-'+p))||'none';selectValue(patternSelect,active);
+})();
 </script></body></html>
