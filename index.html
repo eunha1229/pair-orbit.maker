@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PAIR ORBIT MAKER v16.5.20</title>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PAIR ORBIT MAKER v16.5.30</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gaegu:wght@300;400;700&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Hahmlet:wght@300;400;600;700&family=Jua&family=Montserrat:wght@400;600;700&family=Nanum+Gothic:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@300;400;600;700&family=Noto+Serif+KR:wght@300;400;600;700&family=Orbit&family=Press+Start+2P&family=Song+Myung&display=swap');
 :root{--bg:#f4f2f7;--paper:#fff;--ink:#24202b;--muted:#82798d;--main:#66578a;--sub:#dcd4ea;--accent:#9c88c4;--line:#ddd8e3;--radius:18px;--card-radius:16px;--scene-radius:12px;--shadow:none;--section-gap:42px;--card:#ffffff;--card-ink:#24202b;--pattern:#8aa8d8;--pattern-opacity:.22;--pattern-rgba:rgba(138,168,216,.22);--pattern-rgba-soft:rgba(138,168,216,.12);--pattern-size:24px;--paper-border:#66578a;--body:'Hahmlet',serif;--display:'Montserrat',sans-serif;--orbit-color:#66578a;--orbit-alpha:.38;--orbit-rgba:rgba(102,87,138,.38);--orbit-rgba-strong:rgba(102,87,138,.50);--orbit-opacity:.38;--orbit-size:1;--orbit-font-size:12px;--pair-title-size:42px;--char-name-size:24px;--scene-title-size:16px;--event-title-size:16px;--body-scale-pct:100%;--label-scale-pct:100%;--meta-scale-pct:100%;--fullbody-scale:1.15;--fullbody-x:0px}
@@ -35,6 +35,22 @@
 .paper.pattern-diamond{background-color:var(--paper);background-image:linear-gradient(45deg,var(--pattern-rgba) 1px,transparent 1px),linear-gradient(-45deg,var(--pattern-rgba) 1px,transparent 1px);background-size:var(--pattern-size) var(--pattern-size)}
 .paper.pattern-constellation{background-color:var(--paper);background-image:radial-gradient(circle at 20% 30%,var(--pattern-rgba) 1.5px,transparent 2px),radial-gradient(circle at 70% 60%,var(--pattern-rgba) 1px,transparent 2px),linear-gradient(28deg,transparent 49%,var(--pattern-rgba-soft) 50%,transparent 51%);background-size:calc(var(--pattern-size)*4) calc(var(--pattern-size)*4)}
 .paper.pattern-stars{background-color:var(--paper);background-image:radial-gradient(circle at 15% 20%,var(--pattern-rgba) 1.2px,transparent 2px),radial-gradient(circle at 78% 35%,var(--pattern-rgba) 1px,transparent 2px),radial-gradient(circle at 42% 75%,var(--pattern-rgba-soft) 1.4px,transparent 2.2px);background-size:calc(var(--pattern-size)*3.75) calc(var(--pattern-size)*3.75),calc(var(--pattern-size)*5) calc(var(--pattern-size)*5),calc(var(--pattern-size)*6.25) calc(var(--pattern-size)*6.25)}
+
+/* v16.5.22: visible palette and larger portrait frame */
+.char-images>div:not(.fullbody){position:relative;z-index:2;overflow:visible}
+.char-images .portrait{width:122%;max-width:none;margin-left:-11%;position:relative;z-index:2}
+.char-palette:empty{display:none}
+.char-palette:not(:empty){position:relative;z-index:3}
+/* v16.5.22: portrait prominence and optional color palette */
+.char-images .portrait{min-height:185px!important;}
+.char-images .portrait img{transform-origin:center center;}
+.char-palette{display:flex;flex-wrap:wrap;gap:9px 12px;margin:12px 0 3px;align-items:flex-start}
+.palette-chip{display:flex;align-items:center;gap:5px;min-width:0;font-size:10px;color:var(--card-ink)}
+.palette-swatch{display:block;width:19px;height:19px;flex:none;border-radius:5px;border:1px solid rgba(70,60,90,.15);background:var(--swatch)}
+.palette-name{overflow-wrap:anywhere;max-width:110px}
+.palette-controls{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px}
+.palette-controls input{width:100%;min-width:0;box-sizing:border-box}
+.palette-controls .palette-hex{font-family:monospace}
 </style>
 <style id="richTextStyles">
 .rich-toolbar{position:fixed;z-index:99999;display:none;align-items:center;gap:3px;padding:5px;background:#211d27;border:1px solid #4a4354;border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.22);user-select:none}
@@ -316,7 +332,7 @@
 
 
 <style id="v16516Repair">
-/* v16.5.20 — edge accent is a dedicated DOM layer.
+/* v16.5.22 — edge accent is a dedicated DOM layer.
    Never touch .paper pseudo-elements: Orbit decoration owns those. */
 .paper > .edge-accent-layer{
   position:absolute!important;
@@ -382,7 +398,40 @@
 .paper>.edge-accent-layer>.ea-bottom{bottom:0!important;left:0!important;right:0!important;height:6px!important}
 .paper>.edge-accent-layer>.ea-left{top:0!important;bottom:0!important;left:0!important;width:7px!important}
 </style>
-</head><body><div class="app"><main class="workspace"><article class="paper" id="capture">
+<style id="v16523PortraitPalette">
+/* v16.5.24: portraits sit toward the center of each card, with stable overlap. */
+.char-images{position:relative}
+.char-images>div:not(.fullbody){z-index:2!important;min-width:0}
+.char-images .portrait{width:122%!important;max-width:none!important;margin-left:0!important;position:relative!important;z-index:2!important}
+/* The first card's portrait is on the left; move it right. Others move left. */
+.char-images>div:not(.fullbody) .portrait{transform:translateX(-16%)!important}
+.characters.layout-compact:not(.c1) .char:nth-child(odd) .char-images>div:not(.fullbody) .portrait,
+.characters.layout-wide.c2 .char:nth-child(1) .char-images>div:not(.fullbody) .portrait,
+.characters.layout-wide.c3 .char:nth-child(1) .char-images>div:not(.fullbody) .portrait,
+.characters.layout-wide.c4 .char:nth-child(odd) .char-images>div:not(.fullbody) .portrait,
+.characters.layout-wide.c5 .char:nth-child(1) .char-images>div:not(.fullbody) .portrait,
+.characters.layout-wide.c5 .char:nth-child(4) .char-images>div:not(.fullbody) .portrait,
+.characters.layout-wide.c6 .char:nth-child(1) .char-images>div:not(.fullbody) .portrait,
+.characters.layout-wide.c6 .char:nth-child(4) .char-images>div:not(.fullbody) .portrait{transform:translateX(16%)!important}
+.char-images .fullbody{z-index:3!important;position:relative!important;pointer-events:none}
+/* Palette immediately under keywords, clearly visible without shifting portrait geometry. */
+.char-palette:not(:empty){display:flex!important;position:relative!important;z-index:5!important;margin:7px 0 12px!important;gap:7px 12px!important;min-height:22px}
+.palette-swatch{background-color:var(--swatch,#66578a)!important;width:22px!important;height:22px!important;border:1px solid #a9a1b8!important}
+.palette-chip{font-size:11px!important}
+</style><style id="v16524PalettePortraitFix">
+/* First portrait inward by the same visual amount as the second portrait. */
+.characters.layout-compact:not(.c1) .char:nth-child(odd) .char-images .portrait,
+.characters.layout-wide.c2 .char:nth-child(1) .char-images .portrait,
+.characters.layout-wide.c3 .char:nth-child(1) .char-images .portrait,
+.characters.layout-wide.c4 .char:nth-child(odd) .char-images .portrait,
+.characters.layout-wide.c5 .char:nth-child(1) .char-images .portrait,
+.characters.layout-wide.c5 .char:nth-child(4) .char-images .portrait,
+.characters.layout-wide.c6 .char:nth-child(1) .char-images .portrait,
+.characters.layout-wide.c6 .char:nth-child(4) .char-images .portrait{transform:translateX(37%)!important}
+.char-palette{display:none;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:9px 0 13px;position:relative;z-index:8}
+.char-palette .palette-chip{display:inline-flex;align-items:center;gap:6px;font-size:11px}
+.char-palette .palette-swatch{display:inline-block;width:22px;height:22px;border-radius:5px;border:1px solid #a9a1b8;flex:none}
+</style></head><body><div class="app"><main class="workspace"><article class="paper" id="capture">
 <section class="hero"><div class="eyebrow editable" contenteditable>PAIR ARCHIVE</div><h1 class="pair-title editable" contenteditable>PAIR NAME</h1><div class="pair-catch editable" contenteditable>“Write your pair catchphrase here.”</div><div class="pair-grid"><div class="imgbox ratio-4-3" id="pairImageBox">PAIR IMAGE</div><div class="desc editable" contenteditable>두 사람 혹은 팀의 관계, 세계관, 첫 만남과 현재의 관계 등을 자유롭게 적어주세요.</div></div></section>
 <div class="section-title" data-i18n="characters">CHARACTERS</div><section class="characters c2 layout-compact" id="characters"></section>
 
@@ -397,7 +446,7 @@
 <button type="button" data-cmd="hiliteColor" title="Highlight">H</button>
 <button type="button" data-size="s" title="Small">S</button><button type="button" data-size="m" title="Normal">M</button><button type="button" data-size="l" title="Large">L</button><button type="button" data-size="xl" title="Extra Large">XL</button>
 </div>
-<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 16.5.20</div>
+<aside class="panel"><h1>PAIR ORBIT</h1><div class="ver">MAKER · VERSION 16.5.29</div>
 <div class="group"><h3>TEMPLATE</h3><label>인원 수<select id="count"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><label style="margin-top:8px">Character layout<select id="layoutMode" onchange="applyCharacterLayout()"><option value="compact">COMPACT · 1~2인 1행 / 3~4인 2행 / 5~6인 3행</option><option value="wide">WIDE · 1~3인 1행 / 4~6인 2행</option></select></label><button class="btn wide" onclick="applyCount()">APPLY TEMPLATE</button></div>
 <div class="group"><h3>SECTIONS</h3><label>표기 언어<select id="labelLang" onchange="setLanguage(this.value)"><option value="en">English</option><option value="ko">한국어</option></select></label><div class="toggle"><span>Timeline</span><input type="checkbox" checked onchange="toggleSection('timelineSection',this.checked)"></div><div class="toggle"><span>Scenes</span><input type="checkbox" checked onchange="toggleSection('scenesSection',this.checked)"></div><div class="toggle"><span>Credits</span><input type="checkbox" checked onchange="toggleSection('credits',this.checked)"></div></div>
 <div class="group"><h3>STYLE</h3><div class="row"><label>Main<input type="color" value="#66578a" oninput="css('--main',this.value)"></label><label>Accent<input type="color" value="#9c88c4" oninput="css('--accent',this.value)"></label></div><div class="row"><label>Background<input type="color" value="#f4f2f7" oninput="css('--bg',this.value)"></label><label>Paper<input type="color" value="#ffffff" oninput="css('--paper',this.value)"></label></div><div class="row"><label>Text<input type="color" value="#24202b" oninput="css('--ink',this.value)"></label><label>Sub color<input type="color" value="#dcd4ea" oninput="css('--sub',this.value)"></label></div><div class="row"><label>Card<input id="cardColor" type="color" value="#ffffff" oninput="setCardColor(this.value)"></label><label>Card Text<input id="cardTextColor" type="color" value="#24202b" oninput="setCardText(this.value)"></label></div><div class="toggle"><span>Card Text AUTO</span><input id="cardTextAuto" type="checkbox" checked onchange="toggleCardTextAuto(this.checked)"></div><label>본문 폰트<select onchange="css('--body',this.value)"><option value="'Hahmlet',serif">Hahmlet · 명조</option><option value="'Noto Serif KR',serif">Noto Serif KR · 명조</option><option value="'Nanum Myeongjo',serif">Nanum Myeongjo · 명조</option><option value="'Gowun Batang',serif">Gowun Batang · 명조</option><option value="'Song Myung',serif">Song Myung · 명조</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR · 고딕</option><option value="'MabinogiClassicR',sans-serif">마비옛체 · 게임/픽셀</option><option value="'Nanum Gothic',sans-serif">Nanum Gothic · 고딕</option><option value="'Gowun Dodum',sans-serif">Gowun Dodum · 고딕</option><option value="'Orbit',sans-serif">Orbit · 고딕</option><option value="'Gaegu',cursive">Gaegu · 손글씨</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script · 손글씨</option><option value="'Jua',sans-serif">Jua · 디스플레이</option><option value="'Do Hyeon',sans-serif">Do Hyeon · 디스플레이</option><option value="'Black Han Sans',sans-serif">Black Han Sans · 굵은 제목</option></select></label><label style="margin-top:8px">포인트 폰트<select onchange="css('--display',this.value)"><option value="'Montserrat',sans-serif">Montserrat</option><option value="'Press Start 2P',monospace">Press Start 2P · 8bit</option><option value="'MabinogiClassicR',sans-serif">마비옛체</option><option value="'Jua',sans-serif">Jua</option><option value="'Do Hyeon',sans-serif">Do Hyeon</option><option value="'Black Han Sans',sans-serif">Black Han Sans</option><option value="'Gaegu',cursive">Gaegu</option><option value="'Nanum Pen Script',cursive">Nanum Pen Script</option><option value="'Noto Serif KR',serif">Noto Serif KR</option><option value="'Noto Sans KR',sans-serif">Noto Sans KR</option></select></label></div>
@@ -421,8 +470,13 @@
 <input id="jsonLoadInput" type="file" accept=".json,application/json" style="display:none" onchange="loadJSON(this)">
 <button class="btn wide ghost" onclick="document.getElementById('jsonLoadInput').click()">LOAD DATA (.JSON)</button>
 <div class="small">JSON에는 텍스트·서식·이미지·색상·레이아웃·장식·타임라인·장면·스티커와 편집 설정이 함께 저장됩니다. 새 버전의 사이트에서도 불러올 수 있도록 데이터 스키마 버전을 포함합니다.</div></div>
-</aside></div><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">toggleCardTextAuto(true);
-</script><script>
+</aside></div><style id="v16526fix">
+.characters.layout-compact:not(.c1) .char:nth-child(odd) .char-images>div:not(.fullbody) .portrait{transform:translateX(0%)!important}
+.characters.layout-wide.c2 .char:first-child .char-images>div:not(.fullbody) .portrait{transform:translateX(0%)!important}
+.char .char-palette:not(:empty){display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:10!important;gap:8px!important;flex-wrap:wrap!important;margin:10px 0!important;min-height:24px!important}
+.char-palette .palette-chip{display:inline-flex!important;align-items:center!important;gap:6px!important;font-size:11px!important}
+.char-palette .palette-swatch{display:inline-block!important;width:22px!important;height:22px!important;flex:0 0 22px!important;border-radius:5px!important}
+</style><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script>
 const chars=document.getElementById('characters'), controls=document.getElementById('charControls'); let charCount=2; const imgState={};
 function css(k,v){document.documentElement.style.setProperty(k,v)}
 const paper=document.getElementById('capture');
@@ -522,15 +576,40 @@ function setCardText(v){if(!document.getElementById('cardTextAuto')?.checked)css
 function toggleCardTextAuto(on){let t=document.getElementById('cardTextColor');if(t)t.disabled=on;if(on)setCardColor(document.getElementById('cardColor')?.value||'#ffffff');else if(t)css('--card-ink',t.value)}
 function applyPreset(n){const P={minimal:{main:'#66578a',accent:'#9c88c4',bg:'#f4f2f7',paper:'#ffffff',sub:'#dcd4ea',edge:'soft',shadow:'none',line:'solid',pattern:'none',orbit:'off',frame:'simple',kw:'pill',spacing:'normal'},editorial:{main:'#222222',accent:'#777777',bg:'#ecebea',paper:'#ffffff',sub:'#eeeeee',edge:'square',shadow:'none',line:'solid',pattern:'none',orbit:'off',frame:'none',kw:'underline',spacing:'spacious'},soft:{main:'#8d6f9e',accent:'#b99bc9',bg:'#f7f2f8',paper:'#fffdfd',sub:'#eee2f1',edge:'round',shadow:'soft',line:'solid',pattern:'dot',orbit:'off',frame:'simple',kw:'pill',spacing:'normal'},classic:{main:'#5b4637',accent:'#9b7a5e',bg:'#eee9e1',paper:'#fffdf8',sub:'#e9dfd2',edge:'square',shadow:'soft',line:'double',pattern:'none',orbit:'off',frame:'double',kw:'square',spacing:'spacious'},retro:{main:'#3e3767',accent:'#9b76c8',bg:'#ded9e8',paper:'#fbfaff',sub:'#d9d0ea',edge:'square',shadow:'none',line:'dashed',pattern:'grid',orbit:'off',frame:'simple',kw:'square',spacing:'compact'},orbit:{main:'#5d568f',accent:'#8aa8d8',bg:'#eeedf5',paper:'#ffffff',sub:'#dddaf0',edge:'soft',shadow:'soft',line:'solid',pattern:'stars',orbit:'minimal',frame:'simple',kw:'pill',spacing:'normal'}}[n];if(!P)return;css('--main',P.main);css('--accent',P.accent);css('--bg',P.bg);css('--paper',P.paper);css('--sub',P.sub);setDecorClass('edge-',P.edge);setDecorClass('shadow-',P.shadow);setDecorClass('line-',P.line);setDecorClass('frame-',P.frame);setDecorClass('kw-',P.kw);setDecorClass('spacing-',P.spacing);setPattern(P.pattern);setOrbit(P.orbit);if(n==='orbit'){let oc=document.getElementById('orbitColor');if(oc)oc.value=P.main;setOrbitColor(P.main);let oo=document.getElementById('orbitOpacity');if(oo)oo.value=38;setOrbitOpacity(.38);let os=document.getElementById('orbitSize');if(os)os.value=100;setOrbitSize(1)}let cc=document.getElementById('cardColor');if(cc){cc.value='#ffffff';setCardColor('#ffffff')}}
 function toggleSection(id,on){document.getElementById(id).classList.toggle('hidden',!on)}
-function charHTML(i){return `<article class="char" id="char${i}"><div class="char-head"><div><div class="char-no">CHARACTER ${String(i).padStart(2,'0')}</div><div><span class="char-name editable" contenteditable>NAME ${i}</span><span class="original editable" contenteditable>原語名</span></div></div><span class="codename editable" contenteditable>CODENAME</span></div><div class="catch editable" contenteditable>“Character catchphrase.”</div><div class="facts"><span class="fact editable" contenteditable>AGE · 00</span><span class="fact editable height-fact" contenteditable oninput="heightFactEdited(${i},this)">HEIGHT · 170 cm</span><span class="fact editable" contenteditable>BUILD · SLENDER</span></div><div class="keywords" id="kw${i}"><span class="keyword editable" contenteditable>KEYWORD</span></div><div class="char-images"><div class="imgbox fullbody" id="full${i}">FULL BODY</div><div><div class="imgbox portrait ratio-1-1" id="face${i}">PORTRAIT</div></div></div><div class="detail"><b data-i18n="features">FEATURES & APPEARANCE</b><div class="editable detail-text" contenteditable>외관, 인상, 눈에 띄는 특징 등을 서술하세요.</div></div><div class="detail"><b data-i18n="animal">ANIMALIZATION</b><div class="editable detail-text" contenteditable>동물화 요소</div></div><div class="detail"><b data-i18n="item">ITEM / SYMBOL</b><div class="editable detail-text" contenteditable>소품, 무기, 꽃, 상징물 등</div></div><div class="notes" style="margin-top:18px"><div class="note"><h4 data-i18n="must">MUST</h4><div class="editable" contenteditable>반드시 표현되어야 하는 요소를 적어주세요.</div></div><div class="note"><h4 data-i18n="ng">NG</h4><div class="editable" contenteditable>피하고 싶은 요소를 적어주세요.</div></div></div></article>`}
-function controlHTML(i){return `<div class="control-card"><strong>CHARACTER ${String(i).padStart(2,'0')}</strong><div class="row"><label>Main<input type="color" value="#66578a" oninput="charColor(${i},'--char-main',this.value)"></label><label>Accent<input type="color" value="#9c88c4" oninput="charColor(${i},'--char-accent',this.value)"></label></div><div class="row"><label>Sub<input type="color" value="#dcd4ea" oninput="charColor(${i},'--char-sub',this.value)"></label><label>Line<input type="color" value="#ddd8e3" oninput="charColor(${i},'--char-line',this.value)"></label></div><div class="row"><label>Height (cm)<input id="height${i}" type="number" min="80" max="250" value="170" oninput="setCharHeight(${i},this.value)"></label><label>신장 비례<input type="checkbox" checked onchange="toggleHeightScale(${i},this.checked)"></label></div><label>Full body · 발끝 기준 신장 비례<input type="file" accept="image/*" onchange="loadImage(this,'full${i}',true)"></label><label>Portrait ratio<select onchange="setRatio('face${i}',this.value)"><option value="1-1">1:1</option><option value="2-3">2:3</option><option value="3-4">3:4</option></select></label><label>Portrait<input type="file" accept="image/*" onchange="loadImage(this,'face${i}')"></label><div class="image-controls"><label>Scale<input type="range" min="50" max="300" value="100" oninput="imgScale('face${i}',this.value)"></label><label>X<input type="range" min="-150" max="150" value="0" oninput="imgPos('face${i}','x',this.value)"></label><label>Y<input type="range" min="-150" max="150" value="0" oninput="imgPos('face${i}','y',this.value)"></label><button class="btn ghost" onclick="resetImage('face${i}',this.parentElement)">RESET</button></div><div class="kwinput"><input id="kwi${i}" placeholder="keyword"><button class="btn" onclick="addKeyword(${i})">+</button></div><div class="mini-actions"><button class="btn ghost" onclick="removeLastKeyword(${i})">- keyword</button></div></div>`}
+function charHTML(i){return `<article class="char" id="char${i}"><div class="char-head"><div><div class="char-no">CHARACTER ${String(i).padStart(2,'0')}</div><div><span class="char-name editable" contenteditable>NAME ${i}</span><span class="original editable" contenteditable>原語名</span></div></div><span class="codename editable" contenteditable>CODENAME</span></div><div class="catch editable" contenteditable>“Character catchphrase.”</div><div class="facts"><span class="fact editable" contenteditable>AGE · 00</span><span class="fact editable height-fact" contenteditable oninput="heightFactEdited(${i},this)">HEIGHT · 170 cm</span><span class="fact editable" contenteditable>BUILD · SLENDER</span></div><div class="keywords" id="kw${i}"><span class="keyword editable" contenteditable>KEYWORD</span></div><div class="char-palette" id="palette${i}"></div><div class="char-images"><div class="imgbox fullbody" id="full${i}">FULL BODY</div><div><div class="imgbox portrait ratio-1-1" id="face${i}">PORTRAIT</div></div></div><div class="detail"><b data-i18n="features">FEATURES & APPEARANCE</b><div class="editable detail-text" contenteditable>외관, 인상, 눈에 띄는 특징 등을 서술하세요.</div></div><div class="detail"><b data-i18n="animal">ANIMALIZATION</b><div class="editable detail-text" contenteditable>동물화 요소</div></div><div class="detail"><b data-i18n="item">ITEM / SYMBOL</b><div class="editable detail-text" contenteditable>소품, 무기, 꽃, 상징물 등</div></div><div class="notes" style="margin-top:18px"><div class="note"><h4 data-i18n="must">MUST</h4><div class="editable" contenteditable>반드시 표현되어야 하는 요소를 적어주세요.</div></div><div class="note"><h4 data-i18n="ng">NG</h4><div class="editable" contenteditable>피하고 싶은 요소를 적어주세요.</div></div></div></article>`}
+function controlHTML(i){return `<div class="control-card"><strong>CHARACTER ${String(i).padStart(2,'0')}</strong><div class="row"><label>Main<input type="color" value="#66578a" oninput="charColor(${i},'--char-main',this.value)"></label><label>Accent<input type="color" value="#9c88c4" oninput="charColor(${i},'--char-accent',this.value)"></label></div><div class="row"><label>Sub<input type="color" value="#dcd4ea" oninput="charColor(${i},'--char-sub',this.value)"></label><label>Line<input type="color" value="#ddd8e3" oninput="charColor(${i},'--char-line',this.value)"></label></div><div class="row"><label>Height (cm)<input id="height${i}" type="number" min="80" max="250" value="170" oninput="setCharHeight(${i},this.value)"></label><label>신장 비례<input type="checkbox" checked onchange="toggleHeightScale(${i},this.checked)"></label></div><label>Full body · 발끝 기준 신장 비례<input type="file" accept="image/*" onchange="loadImage(this,'full${i}',true)"></label><label>Portrait ratio<select onchange="setRatio('face${i}',this.value)"><option value="1-1">1:1</option><option value="2-3">2:3</option><option value="3-4">3:4</option></select></label><label>Portrait<input type="file" accept="image/*" onchange="loadImage(this,'face${i}')"></label><div class="image-controls"><label>Scale<input type="range" min="50" max="300" value="115" oninput="imgScale('face${i}',this.value)"></label><label>X<input type="range" min="-150" max="150" value="0" oninput="imgPos('face${i}','x',this.value)"></label><label>Y<input type="range" min="-150" max="150" value="0" oninput="imgPos('face${i}','y',this.value)"></label><button class="btn ghost" onclick="resetImage('face${i}',this.parentElement)">RESET</button></div><div class="palette-editor"><div class="small">COLOR PALETTE · 이름 / HEX (빈칸은 숨김)</div>${Array.from({length:5},(_,n)=>`<div class="palette-controls"><input placeholder="색상 이름 ${n+1}" data-palette-name="${i}-${n}" oninput="updatePalette(${i})" onchange="updatePalette(${i})"><input class="palette-hex" placeholder="#66578A" maxlength="7" data-palette-hex="${i}-${n}" oninput="updatePalette(${i})" onchange="updatePalette(${i})"></div>`).join('')}</div><div class="kwinput"><input id="kwi${i}" placeholder="keyword"><button class="btn" onclick="addKeyword(${i})">+</button></div><div class="mini-actions"><button class="btn ghost" onclick="removeLastKeyword(${i})">- keyword</button></div></div>`}
 function applyCharacterLayout(){const mode=document.getElementById('layoutMode')?.value||'compact';chars.classList.remove('layout-compact','layout-wide');chars.classList.add('layout-'+mode);paper.classList.remove('canvas-wide');const count=charCount||+(document.getElementById('count')?.value||2);if(mode==='wide'&&[3,5,6].includes(count))paper.classList.add('canvas-wide');requestAnimationFrame(()=>{syncFullBodies();scheduleCharacterRowSync()})}
-function applyCount(){charCount=+document.getElementById('count').value; chars.innerHTML='';controls.innerHTML='';chars.className='characters c'+charCount;applyCharacterLayout();for(let i=1;i<=charCount;i++){chars.insertAdjacentHTML('beforeend',charHTML(i));controls.insertAdjacentHTML('beforeend',controlHTML(i));charHeights[i]=170;heightScaleEnabled[i]=true}setLanguage(currentLang);requestAnimationFrame(()=>{syncFullBodies();scheduleCharacterRowSync()})}
+function applyCount(){charCount=+document.getElementById('count').value; chars.innerHTML='';controls.innerHTML='';chars.className='characters c'+charCount;applyCharacterLayout();for(let i=1;i<=charCount;i++){chars.insertAdjacentHTML('beforeend',charHTML(i));controls.insertAdjacentHTML('beforeend',controlHTML(i));charHeights[i]=170;heightScaleEnabled[i]=true}setLanguage(currentLang);requestAnimationFrame(()=>{syncFullBodies();scheduleCharacterRowSync();for(let i=1;i<=charCount;i++)updatePalette(i)})}
 function addKeyword(i){const inp=document.getElementById('kwi'+i), box=document.getElementById('kw'+i);if(!inp.value.trim()||box.children.length>=4)return;let s=document.createElement('span');s.className='keyword editable';s.contentEditable=true;s.textContent=inp.value.trim();box.appendChild(s);inp.value=''} function removeLastKeyword(i){let b=document.getElementById('kw'+i);if(b.lastElementChild)b.lastElementChild.remove()}
 function cropTransparentImage(dataUrl,cb){
  let im=new Image();im.onload=()=>{try{let c=document.createElement('canvas'),x=c.getContext('2d',{willReadFrequently:true});c.width=im.naturalWidth;c.height=im.naturalHeight;x.drawImage(im,0,0);let d=x.getImageData(0,0,c.width,c.height).data,minX=c.width,minY=c.height,maxX=-1,maxY=-1;for(let yy=0;yy<c.height;yy++){for(let xx=0;xx<c.width;xx++){if(d[(yy*c.width+xx)*4+3]>8){if(xx<minX)minX=xx;if(xx>maxX)maxX=xx;if(yy<minY)minY=yy;if(yy>maxY)maxY=yy}}}if(maxX<0){cb(dataUrl);return}let pad=2,sx=Math.max(0,minX-pad),sy=Math.max(0,minY-pad),sw=Math.min(c.width,maxX+pad+1)-sx,sh=Math.min(c.height,maxY+pad+1)-sy,o=document.createElement('canvas');o.width=sw;o.height=sh;o.getContext('2d').drawImage(c,sx,sy,sw,sh,0,0,sw,sh);cb(o.toDataURL('image/png'))}catch(err){cb(dataUrl)}};im.onerror=()=>cb(dataUrl);im.src=dataUrl}
-function loadImage(input,id,natural=false){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{let finish=src=>{let b=document.getElementById(id);b.innerHTML=`<img src="${src}">`;imgState[id]={scale:100,x:0,y:0};if(!natural)updateImg(id);else requestAnimationFrame(syncFullBodies)};if(natural)cropTransparentImage(e.target.result,finish);else finish(e.target.result)};r.readAsDataURL(f)}
+function loadImage(input,id,natural=false){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{let finish=src=>{let b=document.getElementById(id);b.innerHTML=`<img src="${src}">`;imgState[id]={scale:natural?100:115,x:0,y:0};if(!natural){const slider=document.querySelector(`input[oninput="imgScale('${id}',this.value)"]`);if(slider)slider.value=115;updateImg(id);}else requestAnimationFrame(syncFullBodies)};if(natural)cropTransparentImage(e.target.result,finish);else finish(e.target.result)};r.readAsDataURL(f)}
 function setRatio(id,r){let b=document.getElementById(id);['ratio-1-1','ratio-2-3','ratio-3-4','ratio-4-3','ratio-9-16','ratio-16-9'].forEach(c=>b.classList.remove(c));b.classList.add('ratio-'+r)}
+function updatePalette(i){
+ let host=document.getElementById('palette'+i);
+ if(!host){
+   const card=document.getElementById('char'+i);
+   if(!card)return;
+   host=document.createElement('div');host.className='char-palette';host.id='palette'+i;
+   const images=card.querySelector('.char-images');
+   if(images)images.before(host);else card.appendChild(host);
+ }
+ const fragment=document.createDocumentFragment();
+ for(let n=0;n<5;n++){
+  const name=document.querySelector(`[data-palette-name="${i}-${n}"]`)?.value.trim()||'';
+  const raw=document.querySelector(`[data-palette-hex="${i}-${n}"]`)?.value.trim()||'';
+  let hex=raw.replace(/^#/,'');
+  if(/^[0-9a-f]{3}$/i.test(hex))hex=[...hex].map(x=>x+x).join('');
+  if(!/^[0-9a-f]{6}$/i.test(hex))continue;
+  const item=document.createElement('span');item.className='palette-chip';
+  const swatch=document.createElement('span');swatch.className='palette-swatch';swatch.style.setProperty('--swatch','#'+hex);swatch.style.setProperty('background-color','#'+hex,'important');
+  const label=document.createElement('span');label.className='palette-name';label.textContent=name||('#'+hex.toUpperCase());
+  item.append(swatch,label);fragment.append(item);
+ }
+ host.replaceChildren(fragment);
+ host.style.display=host.childElementCount?'flex':'none';
+ scheduleCharacterRowSync();
+}
 function charColor(i,k,v){document.getElementById('char'+i)?.style.setProperty(k,v)}
 function imgScale(id,v){if(!imgState[id])return;imgState[id].scale=+v;updateImg(id)}function imgPos(id,a,v){if(!imgState[id])return;imgState[id][a]=+v;updateImg(id)}function updateImg(id){
  let b=document.getElementById(id),im=b?.querySelector('img'),st=imgState[id];
@@ -788,6 +867,32 @@ function freezeFullBodiesForExport(liveRoot, cloneRoot){
   });
 }
 
+// Export parity: pin portrait image geometry to the live editor, just like full bodies.
+function freezePortraitsForExport(liveRoot, cloneRoot){
+  const liveBoxes=[...liveRoot.querySelectorAll('.char-images .portrait')];
+  const cloneBoxes=[...cloneRoot.querySelectorAll('.char-images .portrait')];
+  liveBoxes.forEach((box,i)=>{
+    const target=cloneBoxes[i], liveImg=box.querySelector('img'), img=target?.querySelector('img');
+    if(!target || !liveImg || !img)return;
+    const b=box.getBoundingClientRect(), r=liveImg.getBoundingClientRect();
+    // The image box retains its own crop and its layout position.
+    target.style.setProperty('overflow',getComputedStyle(box).overflow,'important');
+    img.style.setProperty('position','absolute','important');
+    img.style.setProperty('left',(r.left-b.left)+'px','important');
+    img.style.setProperty('top',(r.top-b.top)+'px','important');
+    img.style.setProperty('right','auto','important');
+    img.style.setProperty('bottom','auto','important');
+    img.style.setProperty('width',r.width+'px','important');
+    img.style.setProperty('height',r.height+'px','important');
+    img.style.setProperty('min-width','0','important');
+    img.style.setProperty('max-width','none','important');
+    img.style.setProperty('min-height','0','important');
+    img.style.setProperty('max-height','none','important');
+    img.style.setProperty('transform','none','important');
+    img.style.setProperty('object-fit','fill','important');
+  });
+}
+
 async function savePNG(){
   if(!window.html2canvas){ alert('PNG renderer is not ready.'); return; }
 
@@ -825,7 +930,7 @@ async function savePNG(){
     doc.write('<!doctype html><html><head></head><body></body></html>');
     doc.close();
 
-    // v16.5.20 — copy the LIVE editor state, not just stylesheet defaults.
+    // v16.5.22 — copy the LIVE editor state, not just stylesheet defaults.
     // Most controls write CSS variables directly to documentElement.style.
     // Missing these was the reason full-body X/scale and typography reverted in PNG.
     doc.documentElement.style.cssText = document.documentElement.style.cssText;
@@ -876,11 +981,31 @@ async function savePNG(){
     }));
     await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
 
-    // v16.5.20: stop asking html2canvas to reinterpret the two unstable areas.
+    // v16.5.22: stop asking html2canvas to reinterpret the two unstable areas.
     // Text is rebuilt at the exact glyph rectangles visible in the editor.
     // Full-body images are pinned to the exact editor pixel rectangles.
     freezeRichTextForExport(paper,target);
     freezeFullBodiesForExport(paper,target);
+    freezePortraitsForExport(paper,target);
+    // v16.5.30: also align the portrait FRAME, not only its inner image.
+    // Relative coordinates are immune to the iframe being positioned off-screen.
+    [...paper.querySelectorAll('.char-images .portrait')].forEach((liveBox,i)=>{
+      const cloneBox=target.querySelectorAll('.char-images .portrait')[i];
+      if(!cloneBox)return;
+      const liveParent=liveBox.closest('.char-images');
+      const cloneParent=cloneBox.closest('.char-images');
+      if(!liveParent||!cloneParent)return;
+      const a=liveBox.getBoundingClientRect(), ap=liveParent.getBoundingClientRect();
+      const b=cloneBox.getBoundingClientRect(), bp=cloneParent.getBoundingClientRect();
+      const dx=(a.left-ap.left)-(b.left-bp.left);
+      const dy=(a.top-ap.top)-(b.top-bp.top);
+      const sx=b.width ? a.width/b.width : 1;
+      const sy=b.height ? a.height/b.height : 1;
+      // The portrait has a CSS !important translateX rule: override it with
+      // the actual desired preview geometry rather than stacking transforms.
+      cloneBox.style.setProperty('transform',`translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`,'important');
+      cloneBox.style.setProperty('transform-origin','top left','important');
+    });
     await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
 
     const h=Math.ceil(target.scrollHeight);
@@ -988,7 +1113,7 @@ function saveJSON(){
     const payload={
       format:'pair-orbit-maker',
       schemaVersion:DATA_SCHEMA_VERSION,
-      appVersion:'16.5.20',
+      appVersion:'16.5.22',
       savedAt:new Date().toISOString(),
       data:{
         paperHTML:document.getElementById('capture').innerHTML,
@@ -1035,7 +1160,7 @@ function loadJSON(input){
       Object.keys(heightScaleEnabled).forEach(k=>delete heightScaleEnabled[k]);Object.assign(heightScaleEnabled,d.heightScaleEnabled||{});
       stickerZ=d.stickerZ||20;
       cap.querySelectorAll('.sticker').forEach(el=>drag(el));
-      setLanguage(currentLang);refreshOrbit();syncFullBodies();scheduleCharacterRowSync();
+      setLanguage(currentLang);refreshOrbit();syncFullBodies();scheduleCharacterRowSync();for(let i=1;i<=charCount;i++)updatePalette(i);
       document.getElementById('stickerEditor').style.display='none';selectedSticker=null;
       alert('데이터를 불러왔습니다.');
     }catch(err){console.error(err);alert('JSON 불러오기 중 오류가 발생했습니다.\n'+(err?.message||err))}
@@ -1123,6 +1248,6 @@ refreshOrbit();scheduleCharacterRowSync();</script><script>
 })();
 setTimeout(syncEdgeAccentFromUI,0);
 
-/* v16.5.20 initialize decoration layers after controls/data restoration. */
+/* v16.5.22 initialize decoration layers after controls/data restoration. */
 requestAnimationFrame(()=>syncEdgeAccentFromUI());
 </script></body></html>
